@@ -24,12 +24,23 @@ wet :- rain.
 wet :- sprinkler.
 dry :- \+ wet.
 
+wet_and_rain :- wet, rain.
+
 /*
 Voeren we hierop de volgende queries uit.
 */
 
 query(dry).
 query(wet).
+
+/*
+Ook een conjunctie kunnen we query'en.
+Zoals hieronder
+We krijgen hiervoor
+wet_and_rain:	0.5
+Aangezien zowel 'wet,rain' als 'wet, rain, sprinkler' bestaan.
+*/
+query(wet_and_rain).
 
 /*
 We krijgen nu
@@ -42,6 +53,9 @@ verkregen zoals in de paper van Smith en Mateas.
 /* Voegen we nu het volgende toe */
 evidence(wet, true).
 
-/* Dan verkrijgen we dat dry een 0 procent kans heeft.
+/*
+Dan verkrijgen we dat dry een 0 procent kans heeft en wet 100 procent kans.
+dry:	0
+wet:	1
 Dit is één van de sterke punten aan ProbLog
 */
