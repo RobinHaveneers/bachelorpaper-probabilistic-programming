@@ -25,6 +25,10 @@ wet :- sprinkler.
 dry :- \+ wet.
 
 wet_and_rain :- wet, rain.
+rain_or_sprinkler :- sprinkler;rain.
+wet_or_rain :- wet;rain.
+wet_and_dry :- wet, dry.
+wet_or_dry :- wet; dry.
 
 /*
 Voeren we hierop de volgende queries uit.
@@ -41,6 +45,7 @@ wet_and_rain:	0.5
 Aangezien zowel 'wet,rain' als 'wet, rain, sprinkler' bestaan.
 */
 query(wet_and_rain).
+query(wet_and_dry).
 
 /*
 We krijgen nu
@@ -50,8 +55,13 @@ Dit komt uiteraard overeen met de answer sets die we
 verkregen zoals in de paper van Smith en Mateas.
 */
 
+/* Ook een disjunctie kunnen we testen */
+query(rain_or_sprinkler).
+query(wet_or_rain).
+query(wet_or_dry).
+
 /* Voegen we nu het volgende toe */
-evidence(wet, true).
+%evidence(wet, true).
 
 /*
 Dan verkrijgen we dat dry een 0 procent kans heeft en wet 100 procent kans.

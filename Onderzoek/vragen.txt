@@ -9,3 +9,5 @@ Als ik dezelfde command dan nogmaals (of 2, 3 keer) run dan krijg ik wel de outp
 - Sample mode werkt niet bij het voorbeeld gegven op readthedocs.
 
 - Hoe kan ik de kans op een conjunctie opvragen in ProbLog ? Gaat dit enkel door een nieuw fact te maken? Of ook in één keer in een query?
+
+- Kan de ; vanuit prolog niet gebruikt worden als disjunctie in ProbLog? => Jawel
