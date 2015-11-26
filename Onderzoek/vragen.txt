@@ -17,10 +17,11 @@ someHeads.
 someHeads.
 
 - Als ik sample oproep met --estimate (voor de tutorial van 'someHeads'), blijft hij een aardige tijd draaien.
-TODO: Hoelang? Krijg ik output? Wat als ik timeout zet?
+Geannuleerd met Ctrl+C, 2 502 331 samples gedaan
+someHeads:	0.79956369
 
 
 
 - Hoe kan ik de kans op een conjunctie opvragen in ProbLog ? Gaat dit enkel door een nieuw fact te maken? Of ook in één keer in een query?
 
-- Kan de ; vanuit prolog niet gebruikt worden als disjunctie in ProbLog? => Jawel
+- Kan de ; vanuit prolog niet gebruikt worden als disjunctie in ProbLog? => Jawel, en in queries direct?
