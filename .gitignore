@@ -31,3 +31,6 @@ Temporary Items
 
 *.docx
 *.pptx
+
+data.txt
+parsed_data.js
