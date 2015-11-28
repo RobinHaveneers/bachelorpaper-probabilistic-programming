@@ -6,27 +6,52 @@
 
 <body>
 
-<canvas id="myCanvas" width="800" height="800" style="padding-left: 0;padding-right: 0;margin-left: auto;margin-right: auto;display: block;border:2px solid #d3d3d3;">
+<canvas id="canvas" width="800" height="800" style="padding-left: 0;padding-right: 0;margin-left: auto;margin-right: auto;display: block;">
 </canvas>
 
 <script>
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext("2d");
 jQuery.get('parsed_data.js', function(data) {
+  var c = document.getElementById("canvas");
+  var ctx = c.getContext("2d");
   var tile_data = JSON.parse(data);
   var dim = Math.sqrt(tile_data.length);
+
   for(var i =0; i<tile_data.length; i++) {
     var xc = tile_data[i].x;
     xc = (800/dim)*(xc - 1);
     var yc = tile_data[i].y;
     yc = (800/dim)*(yc-1);
     var color = tile_data[i].color;
+
     ctx.lineWidth="4";
     ctx.strokeStyle="black";
     ctx.fillStyle = color;
-    ctx.rect(yc,xc,(800/dim),(800/dim));
-    ctx.fillRect(yc,xc,(800/dim),(800/dim));
+    ctx.rect(xc,yc,(800/dim),(800/dim));
+    ctx.fillRect(xc,yc,(800/dim),(800/dim));
     ctx.stroke();
+    }
+  for(var i =0; i<tile_data.length; i++) {
+    if (tile_data[i].name === "s-f") {
+      var sxc = tile_data[i].sx;
+      sxc = (800/dim)*(sxc - 1) + (300/dim);
+      var syc = tile_data[i].sy;
+      syc = (800/dim)*(syc-1) + (450/dim);
+
+      ctx.font = "20px Arial";
+      ctx.fillStyle = "black";
+      ctx.fillText("Start", sxc, syc);
+      ctx.restore();
+
+      var fxc = tile_data[i].fx;
+      fxc = (800/dim)*(fxc - 1) + (240/dim);
+      var fyc = tile_data[i].fy;
+      fyc = (800/dim)*(fyc-1) + (450/dim);
+
+      ctx.font = "20px Arial";
+      ctx.fillStyle = "black";
+      ctx.fillText("Finish", fxc, fyc);
+      ctx.restore();
+    }
   }
 });
 
