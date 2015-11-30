@@ -1,58 +1,31 @@
 :-[lists].
 
-q(X,Y) :- select_uniform(id1, [1,2,3],X, R), select_uniform(id2, [1,2,3], X, R).
+%AUX FUNCTIONS
+list_of_integers(L,U,R) :- findall(X,between(L,U,X), R).
 
-(1/6) :: tile(X, Y,red);
-(1/6) :: tile(X, Y,yellow);
-(1/6) :: tile(X, Y,green);
-(1/6) :: tile(X, Y,cyan);
-(1/6) :: tile(X, Y,blue);
-(1/6) :: tile(X, Y,magenta).
-
+%CONSTANTS
+t_max(35).
+min_sol(20).
+max_sol(35).
 size(6).
-dim(X) :- size(S), K is S-1, between(0,K,X).
-% (1/6) :: color(red);
-% (1/6) :: color(yellow);
-% (1/6) :: color(green);
-% (1/6) :: color(cyan);
-% (1/6) :: color(blue);
-% (1/6) :: color(magenta).
 
+%DIM
+dim(D) :- size(S),list_of_integers(1, S, R), select_uniform(id1,R,D,_).
+tuple_of_dim(X, Y) :- size(S),list_of_integers(1, S, R), select_uniform(id1,R,X,_), select_uniform(id2,R,Y,_).
 
+%TIME
+time(T) :- t_max(S),list_of_integers(1, S, R), select_uniform(id2,R,T,_).
 
-(1/6) :: sxco(1);
-(1/6) :: sxco(2);
-(1/6) :: sxco(3);
-(1/6) :: sxco(4);
-(1/6) :: sxco(5);
-(1/6) :: sxco(6).
-
-(1/6) :: syco(1);
-(1/6) :: syco(2);
-(1/6) :: syco(3);
-(1/6) :: syco(4);
-(1/6) :: syco(5);
-(1/6) :: syco(6).
-
-(1/6) :: fxco(1);
-(1/6) :: fxco(2);
-(1/6) :: fxco(3);
-(1/6) :: fxco(4);
-(1/6) :: fxco(5);
-(1/6) :: fxco(6).
-
-(1/6) :: fyco(1);
-(1/6) :: fyco(2);
-(1/6) :: fyco(3);
-(1/6) :: fyco(4);
-(1/6) :: fyco(5);
-(1/6) :: fyco(6).
-
+%ADJACENT
 adjacent(X,Y,X+1,Y).
 adjacent(X,Y,X-1,Y).
 adjacent(X,Y,X1,Y+1).
 adjacent(X,Y,X,Y-1).
 
+%COLORS
+color(C) :- select_uniform(id1, [red, yellow, green, cyan, blue, magenta],C,_).
+
+%NEXT
 next(red,yellow).
 next(yellow,green).
 next(green,cyan).
@@ -60,15 +33,25 @@ next(cyan,blue).
 next(blue,magenta).
 next(magenta,red).
 
+%ALLOWABLE TRANSITIONS
 ok(C,C) :- color(C).
 ok(C1,C2) :- next(C1,C2).
 ok(C1,C2) :- next(C2,C1).
 
+%PASSABLE STEPS
 passable(SX, SY, X, Y) :-
     adjacent(SX,SY, X, Y),
     tile(C1, SX, SY),
     tile(C2, X, Y).
     ok(C1,C2).
+
+%TILES
+tile(X,Y,C) :- color(C).
+
+% START
+start(X,Y) :- tuple_of_dim(X,Y).
+% FINISH
+finish(X,Y) :- tuple_of_dim(X,Y).
 
 player_at(T, X, Y) :-
   time(T),
@@ -81,6 +64,9 @@ start_and_finish(Sx,Sy,Fx,Fy) :- Sx \== Fx,
 
 %tile(X, Y, C) :- between(1,6,X), between(1, 6, Y), color(C).
 
-query(tile(X,Y,C)) :- between(1,6,X), between(1, 6, Y).
+%query(tile(X,Y,C)) :- between(1,6,X), between(1, 6, Y).
 
-query(start_and_finish(A,B,C,D)).
+query(start(X,Y)).
+query(finish(X,Y)).
+
+%query(start_and_finish(A,B,C,D)).
