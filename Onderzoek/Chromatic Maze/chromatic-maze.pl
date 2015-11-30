@@ -1,3 +1,7 @@
+:-[lists].
+
+q(X,Y) :- select_uniform(id1, [1,2,3],X, R), select_uniform(id2, [1,2,3], X, R).
+
 (1/6) :: tile(X, Y,red);
 (1/6) :: tile(X, Y,yellow);
 (1/6) :: tile(X, Y,green);
@@ -5,6 +9,8 @@
 (1/6) :: tile(X, Y,blue);
 (1/6) :: tile(X, Y,magenta).
 
+size(6).
+dim(X) :- size(S), K is S-1, between(0,K,X).
 % (1/6) :: color(red);
 % (1/6) :: color(yellow);
 % (1/6) :: color(green);
@@ -77,4 +83,4 @@ start_and_finish(Sx,Sy,Fx,Fy) :- Sx \== Fx,
 
 query(tile(X,Y,C)) :- between(1,6,X), between(1, 6, Y).
 
-%query(start_and_finish(A,B,C,D)).
+query(start_and_finish(A,B,C,D)).
