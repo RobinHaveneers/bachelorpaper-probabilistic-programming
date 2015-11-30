@@ -2,16 +2,24 @@
 
 %AUX FUNCTIONS
 list_of_integers(L,U,R) :- findall(X,between(L,U,X), R).
+head([X | _], X).
 
 %CONSTANTS
 t_max(35).
 min_sol(20).
 max_sol(35).
 size(6).
+colors([red, yellow, green, cyan, blue, magenta]).
 
 %DIM
 dim(D) :- size(S),list_of_integers(1, S, R), select_uniform(id1,R,D,_).
-tuple_of_dim(X, Y) :- size(S),list_of_integers(1, S, R), select_uniform(id1,R,X,_), select_uniform(id2,R,Y,_).
+sf_dim(Sx, Sy, Fx, Fy) :-
+  size(S),
+  list_of_integers(1, S, R),
+  select_uniform(id1,R,Sx,Rx),
+  select_uniform(id2,R,Sy,Ry),
+  select_uniform(id3,Rx,Fx,_),
+  select_uniform(id4,Ry,Fy,_).
 
 %TIME
 time(T) :- t_max(S),list_of_integers(1, S, R), select_uniform(id2,R,T,_).
@@ -23,7 +31,7 @@ adjacent(X,Y,X1,Y+1).
 adjacent(X,Y,X,Y-1).
 
 %COLORS
-color(C) :- select_uniform(id1, [red, yellow, green, cyan, blue, magenta],C,_).
+color(C) :- colors(Col),select_uniform(id1, Col,C,_).
 
 %NEXT
 next(red,yellow).
@@ -47,26 +55,30 @@ passable(SX, SY, X, Y) :-
 
 %TILES
 tile(X,Y,C) :- color(C).
-
 % START
-start(X,Y) :- tuple_of_dim(X,Y).
-% FINISH
-finish(X,Y) :- tuple_of_dim(X,Y).
 
+start(X,Y) :- sf_dim(X,Y,_,_).
+% FINISH
+finish(X,Y) :- sf_dim(_,_,X,Y).
+
+%PLAYER AT
+player_at(0,X,Y) :- start(X,Y).
 player_at(T, X, Y) :-
   time(T),
   player_at(T-1, SX, SY),
-  passable(SX, SY, X, Y).
+  passable(SX, SY, X, Y),
+  list_of_integers(0,T,R).
 
-start_and_finish(Sx,Sy,Fx,Fy) :- Sx \== Fx,
-                                 Sy \== Fy,
-                                 sxco(Sx),syco(Sy),fxco(Fx), fyco(Fy).
+%TIME OF COMPLETION
+victory_at(T) :- finish(X,Y), player_at(T, X, Y).
+%VICTORY
+victory :- victory_at(T).
+:- not victory.
+:- victory_at(T), min_sol(M), T < M.
+:- victory_at(T), max_sol(M), T > M.
 
-%tile(X, Y, C) :- between(1,6,X), between(1, 6, Y), color(C).
 
-%query(tile(X,Y,C)) :- between(1,6,X), between(1, 6, Y).
-
+query(tile(X, Y, C)) :- dim(X), dim(Y).
 query(start(X,Y)).
 query(finish(X,Y)).
-
-%query(start_and_finish(A,B,C,D)).
+%query(player_at(T,X,Y)) :- time(T).
