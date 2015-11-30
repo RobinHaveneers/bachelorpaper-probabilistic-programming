@@ -5,6 +5,15 @@
 (1/6) :: tile(X, Y,blue);
 (1/6) :: tile(X, Y,magenta).
 
+% (1/6) :: color(red);
+% (1/6) :: color(yellow);
+% (1/6) :: color(green);
+% (1/6) :: color(cyan);
+% (1/6) :: color(blue);
+% (1/6) :: color(magenta).
+
+
+
 (1/6) :: sxco(1);
 (1/6) :: sxco(2);
 (1/6) :: sxco(3);
@@ -64,6 +73,8 @@ start_and_finish(Sx,Sy,Fx,Fy) :- Sx \== Fx,
                                  Sy \== Fy,
                                  sxco(Sx),syco(Sy),fxco(Fx), fyco(Fy).
 
-query(tile(X,Y,C)) :- between(1,6,X), between(1,6,Y).
+%tile(X, Y, C) :- between(1,6,X), between(1, 6, Y), color(C).
 
-query(start_and_finish(A,B,C,D)).
+query(tile(X,Y,C)) :- between(1,6,X), between(1, 6, Y).
+
+%query(start_and_finish(A,B,C,D)).
