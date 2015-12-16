@@ -14,45 +14,34 @@ jQuery.get('parsed_data.js', function(data) {
   var c = document.getElementById("canvas");
   var ctx = c.getContext("2d");
   var tile_data = JSON.parse(data);
-  var dim = Math.sqrt(tile_data.length);
+  var dim = (tile_data["dim"].dimx);
 
-  for(var i =0; i<tile_data.length; i++) {
-    var xc = tile_data[i].x;
-    xc = (800/dim)*(xc - 1);
-    var yc = tile_data[i].y;
-    yc = (800/dim)*(yc-1);
-    var color = tile_data[i].color;
+  ctx.lineWidth="2";
+  ctx.strokeStyle="black";
+  ctx.font = "30pt Arial";
 
-    ctx.lineWidth="4";
-    ctx.strokeStyle="black";
-    ctx.fillStyle = color;
-    ctx.rect(xc,yc,(800/dim),(800/dim));
-    ctx.fillRect(xc,yc,(800/dim),(800/dim));
-    ctx.stroke();
+  for(var i=1; i <= dim; i++) {
+    for(var j=1; j <= dim; j++) {
+      var index = i.toString() + j.toString();
+      console.log(index);
+      var x = tile_data[index].x;
+      var y = tile_data[index].y;
+      var char = tile_data[index].char;
+      var color = tile_data[index].color;
+      x = (800/dim)*(x-1);
+      y = (800/dim)*(y-1);
+      var tx = x + (330/dim);
+      var ty = y + (530/dim);
+
+
+      ctx.fillStyle = color;
+      ctx.fillRect(x,y,(800/dim),(800/dim));
+      ctx.strokeRect(x,y,(800/dim),(800/dim));
+      ctx.fillStyle="white";
+      ctx.fillText(char, tx, ty )
+      ctx.strokeText(char, tx, ty);
+      }
     }
-  for(var i =0; i<tile_data.length; i++) {
-    if (tile_data[i].name === "s-f") {
-      var sxc = tile_data[i].sx;
-      sxc = (800/dim)*(sxc - 1) + (300/dim);
-      var syc = tile_data[i].sy;
-      syc = (800/dim)*(syc-1) + (450/dim);
-
-      ctx.font = "20px Arial";
-      ctx.fillStyle = "black";
-      ctx.fillText("Start", sxc, syc);
-      ctx.restore();
-
-      var fxc = tile_data[i].fx;
-      fxc = (800/dim)*(fxc - 1) + (240/dim);
-      var fyc = tile_data[i].fy;
-      fyc = (800/dim)*(fyc-1) + (450/dim);
-
-      ctx.font = "20px Arial";
-      ctx.fillStyle = "black";
-      ctx.fillText("Finish", fxc, fyc);
-      ctx.restore();
-    }
-  }
 });
 
 

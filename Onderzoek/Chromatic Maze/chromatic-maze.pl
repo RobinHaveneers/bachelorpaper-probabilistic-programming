@@ -88,9 +88,22 @@ victory :- victory_at(T).
 :- victory_at(T), min_sol(M), T < M.
 :- victory_at(T), max_sol(M), T > M.
 
-query(start(X,Y)).
-query(finish(X,Y)).
+tile_grid(S,S) :- size(S).
+tile_char(X,Y,R) :-
+  player_at(T,X,Y),
+  R is (T mod 10),
+  \+ start(X,Y),
+  \+ finish(X,Y).
+
+tile_char(X, Y, s) :- start(X,Y).
+tile_char(X, Y, f) :- finish(X,Y).
+tile_color(X,Y,C) :- tile(X,Y,C).
+
 query(tile(X,Y,C)) :- dim(X),dim(Y).
 query(player_at(T, X, Y)) :- time(T), dim(X), dim(Y).
 query(victory).
 query(victory_at(T)).
+
+query(tile_grid(S,S)).
+query(tile_char(X,Y,T)) :- dim(X), dim(Y).
+query(tile_color(X,Y,C)).

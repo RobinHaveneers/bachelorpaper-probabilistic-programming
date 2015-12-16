@@ -12,7 +12,9 @@ fi
 read -e -p "Specify program, use tab for completion: " file
 echo "Running ProbLog command"
 problog sample $file --output Scripts/data.txt
+echo "Sorting data"
+sort Scripts/data.txt -o Scripts/data.txt
 echo "Parsing data with javascript"
 node Scripts/parse_data_to_json.js
 echo "Opening ..."
-open Scripts/visualize.html
+open -a "Safari" Scripts/visualize.html
