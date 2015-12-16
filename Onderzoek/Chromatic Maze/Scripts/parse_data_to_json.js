@@ -1,7 +1,7 @@
 var fs = require('fs');
 var dict = [];
 
-fs.readFile('Scripts/data.txt', function(err, data) {
+fs.readFile('testdata.txt', function(err, data) {
     if(err) throw err;
     var array = data.toString().split("\n");
     for (i=0; i<array.length - 1; i++) {
@@ -31,7 +31,7 @@ fs.readFile('Scripts/data.txt', function(err, data) {
         })
       }
     }
-    fs.writeFile("Scripts/parsed_data.js", JSON.stringify(dict), function(err) {
+    fs.writeFile("parsed_data.js", JSON.stringify(dict), function(err) {
         if(err) {
             return console.log(err);
         }
