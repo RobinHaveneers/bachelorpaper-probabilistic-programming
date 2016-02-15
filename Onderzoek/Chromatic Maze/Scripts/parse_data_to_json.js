@@ -9,7 +9,6 @@ fs.readFile('Scripts/data.txt', function(err, data) {
     if(err) throw err;
     var array = data.toString().split("\n");
     var counter = 0;
-    console.log(array[0]);
     for (i=0; i<array.length - 1; i++) {
       if(array[i].length > 0) {
 
@@ -58,10 +57,8 @@ fs.readFile('Scripts/data.txt', function(err, data) {
         }
       }
 
-
     }
-    console.log(dict);
-    fs.writeFile("Scripts/parsed_data.js", JSON.stringify(dict), function(err) {
+    fs.writeFile("Scripts/parsed_data.json", JSON.stringify(dict), function(err) {
         if(err) {
             return console.log(err);
         }

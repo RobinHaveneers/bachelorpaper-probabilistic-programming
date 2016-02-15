@@ -12,9 +12,8 @@ dim(D) :- size(S), between(1,S,D).
 dim_list(L) :- findall(N, dim(N), L).
 
 random_coord(X,Y,I) :- dim_list(DL),
-                       I1 is I/2,
-                       I2 is I,
-                       select_uniform(I1,DL, X,_),
+                       I2 is I/2,
+                       select_uniform(I,DL, X,_),
                        select_uniform(I2,DL, Y,_).
 
 time(T) :- t_max(M), between(0,M,T).
@@ -64,8 +63,6 @@ tile(X,Y,C) :- dim(X), dim(Y),colors(Lc), select_uniform(id(X,Y),Lc, C, _).
 start(X,Y) :- random_coord(X,Y,1).
 finish(X,Y) :- random_coord(X,Y,2).
 
-
-% %PLAYER AT % TODO Is wrong
 player_at(0,X,Y) :- start(X,Y).
 player_at(T, X, Y) :-
      time(T),
@@ -97,14 +94,13 @@ tile_char(X, Y, s) :- start(X,Y).
 tile_char(X, Y, f) :- finish(X,Y).
 tile_color(X,Y,C) :- tile(X,Y,C).
 
-query(victory).
-query(victory_at(T)):- time(T).
+% query(victory).
+% query(victory_at(T)):- time(T).
+% %query(passable(A,B,C,D)) :- dim(A),dim(B),dim(C),dim(D).
+%
 query(start(X,Y)).
 query(finish(X,Y)).
-% query(passable(A,B,C,D)) :- dim(A),dim(B),dim(C),dim(D).
-query(player_at(T, X, Y)) :- time(T), dim(X), dim(Y).
-
-
+% query(player_at(T, X, Y)) :- time(T), dim(X), dim(Y).
 % query(tile_grid(S,S)).
 % query(tile_char(X,Y,T)) :- dim(X), dim(Y).
 % query(tile_color(X,Y,C)).
