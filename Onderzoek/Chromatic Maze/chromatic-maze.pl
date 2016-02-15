@@ -80,13 +80,11 @@ players_at([H|T], X, Y) :-
      \+ player_at(H, X, Y),
      players_at(T,X,Y).
 
-%TIME OF COMPLETION
 victory_at(T) :- finish(X,Y), player_at(T, X, Y).
-%VICTORY
 victory :- victory_at(T).
-:- not victory.
-:- victory_at(T), min_sol(M), T < M.
-:- victory_at(T), max_sol(M), T > M.
+:- \+ victory.
+:- victory_at(T), min_sol(M), T<M.
+:- victory_at(T), max_sol(M), T>M.
 
 tile_grid(S,S) :- size(S).
 tile_char(X,Y,R) :-
@@ -99,11 +97,14 @@ tile_char(X, Y, s) :- start(X,Y).
 tile_char(X, Y, f) :- finish(X,Y).
 tile_color(X,Y,C) :- tile(X,Y,C).
 
-query(tile(X,Y,C)) :- dim(X),dim(Y).
-query(player_at(T, X, Y)) :- time(T), dim(X), dim(Y).
 query(victory).
-query(victory_at(T)).
+query(victory_at(T)):- time(T).
+query(start(X,Y)).
+query(finish(X,Y)).
+% query(passable(A,B,C,D)) :- dim(A),dim(B),dim(C),dim(D).
+query(player_at(T, X, Y)) :- time(T), dim(X), dim(Y).
 
-query(tile_grid(S,S)).
-query(tile_char(X,Y,T)) :- dim(X), dim(Y).
-query(tile_color(X,Y,C)).
+
+% query(tile_grid(S,S)).
+% query(tile_char(X,Y,T)) :- dim(X), dim(Y).
+% query(tile_color(X,Y,C)).
