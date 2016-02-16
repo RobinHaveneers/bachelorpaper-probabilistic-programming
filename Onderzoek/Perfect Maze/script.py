@@ -1,5 +1,15 @@
-dim  = input('Enter dimension: ')
+import math
 
+# Calculate dimension
+lines = 0
+with open("data.txt") as f:
+    for lines, l in enumerate(f):
+        pass
+    lines += 1
+
+dim = math.sqrt(lines + 1)
+
+# Initialize output array
 output = []
 i=0
 while i < ((dim*2)-1):
@@ -18,6 +28,7 @@ while i < ((dim*2)-1):
             j+=1
     i+=1
 
+# Generate array
 with open("data.txt") as f:
     for line in f:
         x = int(line[7])
@@ -39,7 +50,7 @@ with open("data.txt") as f:
             if y < dim:
                 output[(2*y)-1][(2*x)-2] = "\x1B[33m||\x1B[0m"
 
-
+# Print array
 for row in output:
     for e in row:
         print e,
