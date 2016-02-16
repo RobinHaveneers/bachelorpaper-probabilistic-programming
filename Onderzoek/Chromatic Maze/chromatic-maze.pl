@@ -94,13 +94,13 @@ tile_char(X, Y, s) :- start(X,Y).
 tile_char(X, Y, f) :- finish(X,Y).
 tile_color(X,Y,C) :- tile(X,Y,C).
 
-% query(victory).
-% query(victory_at(T)):- time(T).
+ query(victory).
+ query(victory_at(T)):- time(T).
 % %query(passable(A,B,C,D)) :- dim(A),dim(B),dim(C),dim(D).
 %
 query(start(X,Y)).
 query(finish(X,Y)).
-% query(player_at(T, X, Y)) :- time(T), dim(X), dim(Y).
-% query(tile_grid(S,S)).
-% query(tile_char(X,Y,T)) :- dim(X), dim(Y).
-% query(tile_color(X,Y,C)).
+ query(player_at(T, X, Y)) :- time(T), dim(X), dim(Y).
+ query(tile_grid(S,S)).
+ query(tile_char(X,Y,T)) :- dim(X), dim(Y).
+ query(tile_color(X,Y,C)).
