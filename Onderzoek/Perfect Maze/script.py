@@ -1,4 +1,4 @@
-dim = 5
+dim  = input('Enter dimension: ')
 
 output = []
 i=0
