@@ -1,8 +1,9 @@
 :-[lists].
 % Trying to create perfet mazes, mazes where every location is reachable without closed loops.
 % Starting from the idea of trees.
+% In this version, vertical parents are preferred over horizontal parents. (~95% - 5%)
 
-width(4).
+width(3).
 
 dim(D) :- width(W), between(1,W,D).
 
@@ -14,24 +15,24 @@ list_of_corner_directions([(1,0),(0,-1),(0,1),(-1,0)]).
 
 corner_parent((X,Y),Xp,Yp) :- identifier(X,Y,I),
                             list_of_corner_directions(List),
-                            select_weighted(I,[0,1/2,0,1/2],List,(Xp,Yp),_).
+                            select_weighted(I,[0,0.05,0,0.95],List,(Xp,Yp),_).
 
 xmin_parent((X,Y),Xp,Yp) :- identifier(X,Y,I),
                             list_of_directions(List),
-                            select_weighted(I,[1/3,1/3,0,1/3],List,(Xp,Yp),_).
+                            select_weighted(I,[0.025,0.95,0,0.025],List,(Xp,Yp),_).
 
 xmax_parent((X,Y),Xp,Yp) :- identifier(X,Y,I),
                             list_of_directions(List),
-                            select_weighted(I,[1/3,0,1/3,1/3],List,(Xp,Yp),_).
+                            select_weighted(I,[0.025,0,0.95,0.025],List,(Xp,Yp),_).
 
 ymin_parent((X,Y),Xp,Yp) :- Y == 1,
                             identifier(X,Y,I),
                             list_of_directions(List),
-                            select_weighted(I,[0,1/3,1/3,1/3],List,(Xp,Yp),_).
+                            select_weighted(I,[0,0.475,0.475,0.025],List,(Xp,Yp),_).
 
 ymax_parent((X,Y),Xp,Yp) :- identifier(X,Y,I),
                             list_of_directions(List),
-                            select_weighted(I,[1/3,1/3,1/3,0],List,(Xp,Yp),_).
+                            select_weighted(I,[0.025,0.475,0.475,0],List,(Xp,Yp),_).
 
 % Handle all regular cases: no corners, no edges
 parent(X,Y,Xp,Yp) :- width(Max),
