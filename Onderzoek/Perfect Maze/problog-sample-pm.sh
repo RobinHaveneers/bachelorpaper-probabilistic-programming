@@ -11,4 +11,4 @@ date +"%T"
 problog sample -N 1 $file --output data.txt
 date +"%T"
 echo "Parsing data with python"
-python print.py
+python visualize.py
