@@ -51,7 +51,9 @@ with open("data.txt") as f:
                 output[(2*y)-1][(2*x)-2] = "\x1B[33m||\x1B[0m"
 
 # Print array
+print
 for row in output:
     for e in row:
         print e,
     print
+print
