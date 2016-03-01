@@ -38,7 +38,7 @@ parent(X,Y,Xp,Yp) :- width(Max),
                      X \==1, Y\==1, X\==Max, Y\==Max,
                      identifier(X,Y,I),
                      list_of_directions(List),
-                     select_uniform(I,List,(Xp,Yp),_).
+                       select_uniform(I,List,(Xp,Yp),_).
 
 % Handle bottom-right
 parent(X,Y,Xp,Yp) :- width(X),

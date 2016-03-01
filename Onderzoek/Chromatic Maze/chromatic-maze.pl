@@ -1,20 +1,22 @@
 :-[lists].
 %AUX
 list_of_integers(L,U,R) :- findall(M, between(L,U,M),R).
+pairs(P) :- dim_list(L1), dim_list(L2), findall((A,B),(member(A, L1),member(B, L2)),P).
+
+
 
 %CONSTANTS
 t_max(35).
 min_sol(20).
 max_sol(35).
-size(6).
+size(3).
 
 dim(D) :- size(S), between(1,S,D).
 dim_list(L) :- findall(N, dim(N), L).
 
-random_coord(X,Y,I) :- dim_list(DL),
-                       I2 is I/2,
-                       select_uniform(I,DL, X,_),
-                       select_uniform(I2,DL, Y,_).
+start_and_finish((A,B),(C,D)). :- pairs(DL),
+                       select_uniform(1,DL,(A,B),R),
+                       select_uniform(2,R,(C,D),_).
 
 time(T) :- t_max(M), between(0,M,T).
 
@@ -33,22 +35,6 @@ next(cyan,blue).
 next(blue,magenta).
 next(magenta,red).
 
-% next(C1, C2) :-
-%   color(C1),
-%   color(C2),
-%   colors(L),
-%   nth1(I,L,C1),
-%   nth1(J,L,C2),
-%   check_next(I,J,L).
-%
-% check_next(I,J,L) :-
-%   length(L, T),
-%   Len is T-1,
-%   (
-%   1 is abs(I-J);
-%   Len is abs(I-J)
-%   ).
-
 ok(C,C) :- color(C).
 ok(C1,C2) :- next(C1,C2).
 ok(C1,C2) :- next(C2,C1).
@@ -60,8 +46,8 @@ passable(SX, SY, X, Y) :-
      ok(C1,C2).
 
 tile(X,Y,C) :- dim(X), dim(Y),colors(Lc), select_uniform(id(X,Y),Lc, C, _).
-start(X,Y) :- random_coord(X,Y,1).
-finish(X,Y) :- random_coord(X,Y,2).
+start(X,Y) :- start_and_finish((X,Y),(_,_)).
+finish(X,Y) :- start_and_finish((_,_),(X,Y)).
 
 player_at(0,X,Y) :- start(X,Y).
 player_at(T, X, Y) :-
@@ -77,11 +63,12 @@ players_at([H|T], X, Y) :-
      \+ player_at(H, X, Y),
      players_at(T,X,Y).
 
-victory_at(T) :- finish(X,Y), player_at(T, X, Y).
-victory :- victory_at(T).
-:- \+ victory.
-:- victory_at(T), min_sol(M), T<M.
-:- victory_at(T), max_sol(M), T>M.
+victory :- victory_at(T), time(T).
+
+victory_at(T) :-
+  time(T),
+  finish(X,Y),
+  player_at(T, X, Y).
 
 tile_grid(S,S) :- size(S).
 tile_char(X,Y,R) :-
@@ -94,13 +81,14 @@ tile_char(X, Y, s) :- start(X,Y).
 tile_char(X, Y, f) :- finish(X,Y).
 tile_color(X,Y,C) :- tile(X,Y,C).
 
- query(victory).
- query(victory_at(T)):- time(T).
-% %query(passable(A,B,C,D)) :- dim(A),dim(B),dim(C),dim(D).
-%
-query(start(X,Y)).
-query(finish(X,Y)).
- query(player_at(T, X, Y)) :- time(T), dim(X), dim(Y).
- query(tile_grid(S,S)).
- query(tile_char(X,Y,T)) :- dim(X), dim(Y).
- query(tile_color(X,Y,C)).
+query(pairs(L)).
+% query(start(X,Y)).
+% query(finish(X,Y)).
+% query(player_at(T, X, Y)) :- time(T), dim(X), dim(Y).
+% query(tile_grid(S,S)).
+% query(tile_char(X,Y,T)) :- dim(X), dim(Y).
+% query(tile_color(X,Y,C)).
+
+%evidence(victory).
+%evidence(victory_at(T)) :- time(T), min_sol(Min), T > Min.
+%evidence(victory_at(T)) :- time(T), max_sol(Max), T < Max.
