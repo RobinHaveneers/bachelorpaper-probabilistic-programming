@@ -1,7 +1,11 @@
 :-[lists].
 %AUX
 list_of_integers(L,U,R) :- findall(M, between(L,U,M),R).
-pairs(P) :- dim_list(L1), dim_list(L2), findall((A,B),(member(A, L1),member(B, L2)),P).
+pairs(P) :-
+  dim_list(L1),
+  dim_list(L2),
+  findall((A,B),
+  (member(A, L1),member(B, L2)),P).
 
 
 
@@ -9,24 +13,42 @@ pairs(P) :- dim_list(L1), dim_list(L2), findall((A,B),(member(A, L1),member(B, L
 t_max(35).
 min_sol(20).
 max_sol(35).
-size(3).
+size(5).
 
-dim(D) :- size(S), between(1,S,D).
-dim_list(L) :- findall(N, dim(N), L).
+dim(D) :-
+  size(S),
+  between(1,S,D).
+dim_list(L) :-
+  findall(N, dim(N), L).
 
-start_and_finish((A,B),(C,D)). :- pairs(DL),
-                       select_uniform(1,DL,(A,B),R),
-                       select_uniform(2,R,(C,D),_).
+start_and_finish((A,B),(C,D)) :-
+  pairs(P),
+  select_uniform(1,P,(A,B),_),
+  select_uniform(2,P,(C,D),_).
 
 time(T) :- t_max(M), between(0,M,T).
 
-adjacent(X,Y,Nx,Y) :- dim(X), dim(Y), Nx is X+1.
-adjacent(X,Y,Nx,Y) :- dim(X), dim(Y), Nx is X-1.
-adjacent(X,Y,X,Ny) :- dim(X), dim(Y), Ny is Y+1.
-adjacent(X,Y,X,Ny) :- dim(X), dim(Y), Ny is Y-1.
+adjacent(X,Y,Nx,Y) :-
+  dim(X),
+  dim(Y),
+  Nx is X+1.
+adjacent(X,Y,Nx,Y) :-
+  dim(X),
+  dim(Y),
+  Nx is X-1.
+adjacent(X,Y,X,Ny) :-
+  dim(X),
+  dim(Y),
+  Ny is Y+1.
+adjacent(X,Y,X,Ny) :-
+  dim(X),
+  dim(Y),
+  Ny is Y-1.
 
 colors([red, yellow, green, cyan, blue, magenta]).
-color(C) :- colors(L), member(C,L).
+color(C) :-
+  colors(L),
+  member(C,L).
 
 next(red,yellow).
 next(yellow,green).
@@ -45,7 +67,12 @@ passable(SX, SY, X, Y) :-
      tile(X, Y, C2),
      ok(C1,C2).
 
-tile(X,Y,C) :- dim(X), dim(Y),colors(Lc), select_uniform(id(X,Y),Lc, C, _).
+tile(X,Y,C) :-
+  dim(X),
+  dim(Y),
+  colors(Lc),
+  select_uniform(id(X,Y),Lc, C, _).
+
 start(X,Y) :- start_and_finish((X,Y),(_,_)).
 finish(X,Y) :- start_and_finish((_,_),(X,Y)).
 
@@ -81,14 +108,16 @@ tile_char(X, Y, s) :- start(X,Y).
 tile_char(X, Y, f) :- finish(X,Y).
 tile_color(X,Y,C) :- tile(X,Y,C).
 
-query(pairs(L)).
-% query(start(X,Y)).
-% query(finish(X,Y)).
-% query(player_at(T, X, Y)) :- time(T), dim(X), dim(Y).
-% query(tile_grid(S,S)).
-% query(tile_char(X,Y,T)) :- dim(X), dim(Y).
-% query(tile_color(X,Y,C)).
+query(start(X,Y)).
+query(finish(X,Y)).
+query(player_at(T, X, Y)) :-
+  time(T),
+  dim(X),
+  dim(Y).
+query(tile_grid(S,S)).
+query(tile_char(X,Y,T)) :- dim(X), dim(Y).
+query(tile_color(X,Y,C)).
 
-%evidence(victory).
+evidence(victory).
 %evidence(victory_at(T)) :- time(T), min_sol(Min), T > Min.
 %evidence(victory_at(T)) :- time(T), max_sol(Max), T < Max.
