@@ -1,0 +1,27 @@
+- Hoe komt dat het ik soms meermaals mijn programma door problog moet draaien voor ik een uitkomst krijg?
+Voorbeeld:
+
+  problog ans-prob.pl
+  DSharpError: DSharp has encountered an error. This is a known issue. See KNOWN_ISSUES for details on how to resolve this problem.
+
+Als ik dezelfde command dan nogmaals (of 2, 3 keer) run dan krijg ik wel de output die ik verwacht.
+
+- Sample mode werkt niet bij het voorbeeld gegven op readthedocs. Hij output bij mij gewoon
+
+prolog sample problog-tutorial.pl -N 3
+
+someHeads.
+----------------
+someHeads.
+----------------
+someHeads.
+
+- Als ik sample oproep met --estimate (voor de tutorial van 'someHeads'), blijft hij een aardige tijd draaien.
+Geannuleerd met Ctrl+C, 2 502 331 samples gedaan
+someHeads:	0.79956369
+
+
+
+- Hoe kan ik de kans op een conjunctie opvragen in ProbLog ? Gaat dit enkel door een nieuw fact te maken? Of ook in één keer in een query?
+
+- Kan de ; vanuit prolog niet gebruikt worden als disjunctie in ProbLog? => Jawel, en in queries direct?

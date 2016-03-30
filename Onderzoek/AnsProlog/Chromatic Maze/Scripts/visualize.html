@@ -1,0 +1,47 @@
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
+<title>ProBlog Graphical Display</title>
+</head>
+
+<body>
+
+<canvas id="canvas" width="800" height="800" style="padding-left: 0;padding-right: 0;margin-left: auto;margin-right: auto;display: block;">
+</canvas>
+
+<script>
+jQuery.get('parsed_data.json', function(data) {
+  var c = document.getElementById("canvas");
+  var ctx = c.getContext("2d");
+  var tile_data = JSON.parse(data);
+  var dim = (tile_data["dim"].dimx);
+
+  ctx.lineWidth="1";
+  ctx.strokeStyle="black";
+  ctx.font = "30pt Arial";
+  for(var i=1; i <= dim; i++) {
+    for(var j=1; j <= dim; j++) {
+      var index = i.toString() + j.toString();
+      var x = tile_data[index].x;
+      var y = tile_data[index].y;
+      var char = tile_data[index].char;
+      var color = tile_data[index].color;
+      x = (800/dim)*(x-1);
+      y = (800/dim)*(y-1);
+      var tx = x + (330/dim);
+      var ty = y + (530/dim);
+
+
+      ctx.fillStyle = color;
+      ctx.fillRect(x,y,(800/dim),(800/dim));
+      ctx.strokeRect(x,y,(800/dim),(800/dim));
+      ctx.fillStyle="white";
+      ctx.fillText(char, tx, ty )
+      ctx.strokeText(char, tx, ty);
+      }
+    }
+});
+</script>
+
+</body>
+</html>
