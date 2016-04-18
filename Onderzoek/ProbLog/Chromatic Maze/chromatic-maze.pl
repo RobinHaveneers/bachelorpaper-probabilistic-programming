@@ -7,8 +7,6 @@ pairs(P) :-
   findall((A,B),
   (member(A, L1),member(B, L2)),P).
 
-
-
 %CONSTANTS
 t_max(35).
 min_sol(20).
