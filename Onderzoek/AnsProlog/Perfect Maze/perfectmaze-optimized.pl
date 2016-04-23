@@ -57,6 +57,6 @@ dim(1..W) :- width(W).
   dim(Y).
 
 
-%linked(1,1).
-%linked(X,Y) :- parent(X,Y,DX,DY), linked(X+DX,Y+DY).
-%:- dim(X),dim(Y), not linked(X,Y).
+linked(1,1).
+linked(X,Y) :- parent(X,Y,DX,DY), linked(X+DX,Y+DY).
+:- dim(X),dim(Y), not linked(X,Y).
