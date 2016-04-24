@@ -2,7 +2,7 @@
 % Trying to create perfet mazes, mazes where every location is reachable without closed loops.
 % Starting from the idea of trees.
 
-width(3).
+width(2).
 
 dim(D) :- width(W), between(1,W,D).
 

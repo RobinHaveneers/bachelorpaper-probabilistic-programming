@@ -1,7 +1,7 @@
 t_max(35).
-min_sol(0).
+min_sol(25).
 max_sol(30).
-size(20).
+size(6).
 
 dim(1..S) :- size(S).
 t(0..T) :- t_max(T).

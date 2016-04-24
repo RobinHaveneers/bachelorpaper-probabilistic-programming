@@ -1,4 +1,4 @@
-width(4).
+width(5).
 dim(1..W) :- width(W).
 
 % Handle all regulare cases: no corners, no edges
@@ -6,8 +6,15 @@ dim(1..W) :- width(W).
   width(Max),
   dim(X),
   dim(Y),
+  dim(A),
   (X,Y) != (1,1),
-  (X,Y) != (Max,Max).
+  (X,Y) != (Max,Max),
+  (X,Y) != (1,Max),
+  (X,Y) != (Max,1),
+  (X,Y) != (A,1),
+  (X,Y) != (A,Max),
+  (X,Y) != (1,A),
+  (X,Y) != (Max,A).
 
 % Handle bottom-right
 1 {parent(X,Y,0,-1);parent(X,Y,-1,0)} 1 :-

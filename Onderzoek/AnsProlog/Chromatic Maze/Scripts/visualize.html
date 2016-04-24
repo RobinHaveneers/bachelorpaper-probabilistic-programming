@@ -26,6 +26,7 @@ jQuery.get('parsed_data.json', function(data) {
       var y = tile_data[index].y;
       var char = tile_data[index].char;
       var color = tile_data[index].color;
+      color = RGBColor(color);
       x = (800/dim)*(x-1);
       y = (800/dim)*(y-1);
       var tx = x + (330/dim);
@@ -35,12 +36,44 @@ jQuery.get('parsed_data.json', function(data) {
       ctx.fillStyle = color;
       ctx.fillRect(x,y,(800/dim),(800/dim));
       ctx.strokeRect(x,y,(800/dim),(800/dim));
-      ctx.fillStyle="white";
-      ctx.fillText(char, tx, ty )
-      ctx.strokeText(char, tx, ty);
+      ctx.fillStyle="#333333";
+      ctx.fillText(char, tx, ty );
       }
     }
 });
+</script>
+<script>
+function RGBColor(color_string)
+{
+    this.ok = false;
+
+    // strip any leading #
+    if (color_string.charAt(0) == '#') { // remove # if any
+        color_string = color_string.substr(1,6);
+    }
+
+    color_string = color_string.replace(/ /g,'');
+    color_string = color_string.toLowerCase();
+    // before getting into regexps, try simple matches
+    // and overwrite the input
+    var simple_colors = {
+        blue: '9acfe3',
+        red: 'FF6961',
+        cyan: 'E0FFFF',
+        green: '77DD77',
+        magenta: 'F49AC2',
+        pink: 'DEA5A4',
+        purple: 'B39EB5',
+        white: 'ffffff',
+        yellow: 'FCE883',
+    };
+    for (var key in simple_colors) {
+        if (color_string == key) {
+            return "#"+simple_colors[key];
+        }
+    }
+    // emd of simple type-in colorss
+}
 </script>
 
 </body>
