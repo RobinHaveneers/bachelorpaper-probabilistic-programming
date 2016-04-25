@@ -9,7 +9,7 @@ pairs(P) :-
 
 %CONSTANTS
 t_max(35).
-size(6).
+size(3).
 
 dim(D) :-
   size(S),

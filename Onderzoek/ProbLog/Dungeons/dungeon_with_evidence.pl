@@ -1,6 +1,6 @@
 :-[lists].
 
-width(2).
+width(3).
 minwall(1).
 dim(D) :- width(W), between(1,W,D).
 
@@ -13,7 +13,7 @@ pairs(P) :-
 dim_list(L) :-
   findall(N, dim(N), L).
 
-sprites([gem,altar,wall,none]).
+sprites([gem,altar,wall]).
 
 identifier(X,Y,I) :- I is (X+Y+X+Y+1)/2 + Y.
 
