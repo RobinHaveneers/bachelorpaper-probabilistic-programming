@@ -6,7 +6,7 @@ with open('data.txt', 'r') as myfile:
 
 gem = re.search('gem\(\(\d+, \d+\)\)',data).group(0).split(',')
 altar =  re.search('altar\(\(\d+, \d+\)\)',data).group(0).split(',')
-rest = re.findall("\(\d+, \d+, [a-z]+\)", data)
+rest = re.findall('rest\(\(\d+, \d+, [a-z]+\)\)', data)
 
 dim = int(math.sqrt(len(gem) + len(altar) + len(rest)))
 
@@ -34,6 +34,7 @@ output[int(ygem)-1][int(xgem)-1] = "\x1B[32mG\x1B[0m"
 output[int(yaltar)-1][int(xaltar)-1] = "\x1B[31mA\x1B[0m"
 
 for i in rest:
+    i = i.replace("rest","")
     i = (((i.replace("(","")).replace(")","")).replace(" ", "")).split(",")
     if i[2] == "wall":
         output[int(i[1])-1][int(i[0])-1] = "\x1B[36mW\x1B[0m"

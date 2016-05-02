@@ -1,7 +1,7 @@
 t_max(35).
 min_sol(25).
 max_sol(30).
-size(4).
+size(5).
 
 dim(1..S) :- size(S).
 t(0..T) :- t_max(T).
@@ -11,14 +11,12 @@ adjacent(X,Y,X-1,Y):- dim(X), dim(Y).
 adjacent(X,Y,X,Y+1):- dim(X), dim(Y).
 adjacent(X,Y,X,Y-1):- dim(X), dim(Y).
 
-color(red;yellow;green;cyan;blue;magenta).
+color(red;yellow;green;cyan).
 
 next(red,yellow).
 next(yellow,green).
 next(green,cyan).
-next(cyan,blue).
-next(blue,magenta).
-next(magenta,red).
+next(cyan,red).
 
 ok(C,C) :- color(C).
 ok(C1,C2) :- next(C1,C2).
