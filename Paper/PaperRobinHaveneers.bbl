@@ -1,0 +1,42 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{De~Raedt \bgroup \em et al.\egroup
+  }{2007}]{raedt07problog}
+Luc De~Raedt, Angelika Kimmig, and Hannu Toivonen.
+\newblock Problog: A probabilistic prolog and its application in link
+  discovery.
+\newblock In Manuela~M. Veloso, editor, {\em IJCAI}, pages 2462--2467, 2007.
+
+\bibitem[\protect\citeauthoryear{Gebser \bgroup \em et al.\egroup }{}]{clingo}
+Martin Gebser, Roland Kaminski, Benjamin Kaufmann, Max Ostrowski, Torsten
+  Schaub, and Sven Thiele.
+\newblock A user’s guide to gringo, clasp, clingo, and iclingo.
+
+\bibitem[\protect\citeauthoryear{Lifschitz}{2008}]{vladimir}
+Vladimir Lifschitz.
+\newblock What is answer set programming?
+\newblock In {\em Proceedings of the Twenty-Third {AAAI} Conference on
+  Artificial Intelligence, {AAAI} 2008, Chicago, Illinois, USA, July 13-17,
+  2008}, pages 1594--1597, 2008.
+
+\bibitem[\protect\citeauthoryear{Smith and Bryson}{2015}]{smith}
+Anthony~J. Smith and Joanna~J. Bryson.
+\newblock A logical approach to building dungeons: Answer set programming for
+  hierarchical procedural content generation in roguelike games.
+\newblock In {\em Proceedings of the 50th Anniversary Convention of the AISB}.
+  2015.
+
+\bibitem[\protect\citeauthoryear{Togelius \bgroup \em et al.\egroup
+  }{2015}]{togelius2015introduction}
+Julian Togelius, Noor Shaker, and Mark~J. Nelson.
+\newblock Introduction.
+\newblock In Noor Shaker, Julian Togelius, and Mark~J. Nelson, editors, {\em
+  Procedural Content Generation in Games: A Textbook and an Overview of Current
+  Research}. Springer, 2015.
+
+\bibitem[\protect\citeauthoryear{Yannakakis and Togelius}{2011}]{yannakakis}
+Georgios~N. Yannakakis and Julian Togelius.
+\newblock Experience-driven procedural content generation.
+\newblock {\em IEEE Transactions on Affective Computing}, 2:147 -- 161, 2011.
+
+\end{thebibliography}
