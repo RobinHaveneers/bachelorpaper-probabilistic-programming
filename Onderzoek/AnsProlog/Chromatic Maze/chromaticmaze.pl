@@ -1,7 +1,7 @@
 t_max(35).
-min_sol(25).
+min_sol(20).
 max_sol(30).
-size(2).
+size(5).
 
 dim(1..S) :- size(S).
 t(0..T) :- t_max(T).
@@ -46,8 +46,8 @@ victory_at(T) :- player_at(T,X,Y), finish(X,Y).
 
 victory :- victory_at(T).
 
-%:- victory_at(T), min_sol(MinSol),T < MinSol.
-%:- victory_at(T), max_sol(MaxSol),MaxSol < T.
+:- victory_at(T), min_sol(MinSol),T < MinSol.
+:- victory_at(T), max_sol(MaxSol),MaxSol < T.
 
 :- not victory.
 

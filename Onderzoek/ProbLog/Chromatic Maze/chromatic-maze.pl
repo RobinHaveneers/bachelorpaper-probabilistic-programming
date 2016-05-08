@@ -9,7 +9,7 @@ pairs(P) :-
 
 %CONSTANTS
 t_max(35).
-size(3).
+size(5).
 
 dim(D) :-
   size(S),
@@ -96,9 +96,10 @@ victory_at(T) :-
 tile_grid(S,S) :- size(S).
 tile_char(X,Y,R) :-
   player_at(T,X,Y),
+  T > 0,
   R is (T mod 10),
-  \+ start(X,Y),
-  \+ finish(X,Y).
+  not start(X,Y),
+  not finish(X,Y).
 
 tile_char(X, Y, s) :- start(X,Y).
 tile_char(X, Y, f) :- finish(X,Y).

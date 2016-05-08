@@ -1,12 +1,12 @@
 #!/bin/bash
 rm -f data*
-clingo --models 20 --rand-freq=1 cm-ans.pl >> dataALL.txt
+clingo --models 20 --rand-freq=1 --seed=987654321 cm-ans.pl >> dataALL.txt
 cat dataALL.txt | tr " " "\n" >> dataALLsep.txt
 csplit -n 2 -f 'data' -k dataALLsep.txt '/^Answer*/' '{50000}' > /dev/null
 rm dataALL.txt
 rm dataALLsep.txt
 
-rm result.csv
+rm -f result.csv
 for i in `seq 1 20`;
 do
   for j in `seq $i 20`;

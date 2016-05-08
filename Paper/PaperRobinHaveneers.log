@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.18)  5 MAY 2016 11:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.18)  8 MAY 2016 13:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -373,51 +373,33 @@ Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 486.
 
 (./PaperRobinHaveneers.aux
 
-LaTeX Warning: Label `fig:sub1' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:sub1' multiply defined.
-
-
-LaTeX Warning: Label `fig:sub2' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:sub2' multiply defined.
-
-
-LaTeX Warning: Label `fig:sub3' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:sub3' multiply defined.
-
-
 LaTeX Warning: Label `fig:test' multiply defined.
 
 )
 \openout1 = `PaperRobinHaveneers.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 192.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 192.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 194.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 194.
 
  (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 192.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 194.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptm.fd
@@ -425,7 +407,7 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 \c@lstlisting=\count113
 \AtBeginShipoutBox=\box32
-Package hyperref Info: Link coloring OFF on input line 192.
+Package hyperref Info: Link coloring OFF on input line 194.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -435,9 +417,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count114
 )
-LaTeX Info: Redefining \ref on input line 192.
-LaTeX Info: Redefining \pageref on input line 192.
-LaTeX Info: Redefining \nameref on input line 192.
+LaTeX Info: Redefining \ref on input line 194.
+LaTeX Info: Redefining \pageref on input line 194.
+LaTeX Info: Redefining \nameref on input line 194.
 
 (./PaperRobinHaveneers.out) (./PaperRobinHaveneers.out)
 \@outlinefile=\write4
@@ -475,124 +457,69 @@ e
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 195.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 197.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 195.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 197.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 195.
+(Font)              <12> on input line 197.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 195.
+(Font)              <8> on input line 197.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 195.
-
-Underfull \hbox (badness 1205) in paragraph at lines 197--198
-\OT1/ptm/m/n/10 ProbLog, een pro-ba-bi-lis-ti-sche de-cla-ra-tieve pro-
- []
-
+(Font)              <6> on input line 197.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 200.
+(babel)             in language append on input line 202.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 200.
+(babel)             in language append on input line 202.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 203.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 205.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 203.
+(babel)             in language append on input line 205.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 203.
+(babel)             in language append on input line 205.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 209.
+(babel)             in language append on input line 211.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 209.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 212.
+(babel)             in language append on input line 211.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 214.
+
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-LaTeX Font Info:    Try loading font information for OMS+pcr on input line 212.
+LaTeX Font Info:    Try loading font information for OMS+pcr on input line 214.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omspcr.fd
 File: omspcr.fd 
 )
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 212.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 216.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 216.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 216.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 214.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 218.
+(babel)             in language append on input line 221.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 218.
-
-Underfull \hbox (badness 1540) in paragraph at lines 219--219
-[][][]\OT1/ptm/m/n/9 Declaratieve Ta-len en Ar-ti-fici[]ele In-tel-li-gen-tie, 
-[]$\OT1/pcr/m/n/9 https : / /
- []
-
+(babel)             in language append on input line 221.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 220.
+(babel)             in language append on input line 221.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 220.
-Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 220.
-Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 220.
-[1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(babel)             in language append on input line 221.
+ [1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 
 ]
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 225.
+(babel)             in language append on input line 221.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 225.
-Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 228.
-Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 228.
-Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 231.
-Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 231.
-Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 234.
-Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 234.
-Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 237.
-Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 237.
-Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 239.
-Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 239.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 243.
-Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 251.
-Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 251.
-Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 251.
-Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 251.
+(babel)             in language append on input line 221.
 
-[2]
-Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 252.
-Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 252.
-
-Underfull \hbox (badness 6658) in paragraph at lines 253--254
-\OT1/ptm/m/n/10 Het eer-ste deel van mijn on-der-zoek be-stond er in
+Underfull \hbox (badness 3503) in paragraph at lines 222--223
+\OT1/ptm/m/n/10 ProbLog is een pro-ba-bi-lis-ti-sche uit-brei-ding op Pro-log
  []
 
 
-Underfull \hbox (badness 1331) in paragraph at lines 253--254
-\OT1/ptm/m/n/10 de AnsProlog-programma's om te vor-men tot ProbLog-
+Underfull \hbox (badness 1824) in paragraph at lines 222--223
+[] []\OT1/ptm/m/n/10 De Raedt \OT1/ptm/m/it/10 et al.\OT1/ptm/m/n/10 , 2007[][]
+. Uniek aan Prob-Log is dat
  []
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -601,154 +528,167 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang2.sty
 File: lstlang2.sty 2015/06/04 1.6 listings language file
 )
-Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 295.
-Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 295.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 310.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 234.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-Underfull \hbox (badness 1515) in paragraph at lines 310--312
-\OT1/ptm/m/n/10 Voor de \OT1/ptm/m/it/10 chro-ma-tic maze \OT1/ptm/m/n/10 heb i
-k 3 soor-ten cri-te-ria
+Underfull \hbox (badness 1226) in paragraph at lines 242--243
+[]\OT1/ptm/m/n/10 Verder is het in een ProbLog-programma ook mo-ge-
  []
 
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 318.
+(babel)             in language append on input line 247.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 318.
+(babel)             in language append on input line 247.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 318.
+(babel)             in language append on input line 252.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 318.
-[3]
-Underfull \hbox (badness 2213) in paragraph at lines 322--324
-\OT1/ptm/m/n/10 zeg-gen dat het vakje (3,2) ver-bon-den is met
+(babel)             in language append on input line 252.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 255.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 255.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 255.
+<Images/cm.png, id=109, 809.0225pt x 807.015pt>
+File: Images/cm.png Graphic file (type png)
+ <use Images/cm.png>
+Package pdftex.def Info: Images/cm.png used on input line 261.
+(pdftex.def)             Requested size: 126.47249pt x 126.15735pt.
+
+<Images/pm.png, id=111, 734.745pt x 500.87125pt>
+File: Images/pm.png Graphic file (type png)
+ <use Images/pm.png>
+Package pdftex.def Info: Images/pm.png used on input line 268.
+(pdftex.def)             Requested size: 126.47249pt x 86.2093pt.
+
+<Images/dungeon.png, id=112, 492.84125pt x 507.8975pt>
+File: Images/dungeon.png Graphic file (type png)
+
+<use Images/dungeon.png>
+Package pdftex.def Info: Images/dungeon.png used on input line 275.
+(pdftex.def)             Requested size: 126.47249pt x 130.32976pt.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 283.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 283.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 287.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 295.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 295.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 295.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 295.
+ [2]
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 296.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 296.
+
+Underfull \hbox (badness 2005) in paragraph at lines 297--298
+\OT1/ptm/m/n/10 Het eer-ste deel van mijn on-der-zoek be-stond er in de
  []
 
-<Grafieken/Tijd/chm_100_log.pdf, id=149, 505.89pt x 361.35pt>
-File: Grafieken/Tijd/chm_100_log.pdf Graphic file (type pdf)
-
-<use Grafieken/Tijd/chm_100_log.pdf>
-Package pdftex.def Info: Grafieken/Tijd/chm_100_log.pdf used on input line 352.
-
-(pdftex.def)             Requested size: 166.94463pt x 119.24586pt.
-
-<Grafieken/Tijd/dungeons_100_log.pdf, id=150, 505.89pt x 361.35pt>
-File: Grafieken/Tijd/dungeons_100_log.pdf Graphic file (type pdf)
-
-<use Grafieken/Tijd/dungeons_100_log.pdf>
-Package pdftex.def Info: Grafieken/Tijd/dungeons_100_log.pdf used on input line
- 358.
-(pdftex.def)             Requested size: 166.94463pt x 119.24586pt.
-
-<Grafieken/Tijd/pm_100_log.pdf, id=151, 505.89pt x 361.35pt>
-File: Grafieken/Tijd/pm_100_log.pdf Graphic file (type pdf)
-
-<use Grafieken/Tijd/pm_100_log.pdf>
-Package pdftex.def Info: Grafieken/Tijd/pm_100_log.pdf used on input line 364.
-(pdftex.def)             Requested size: 166.94463pt x 119.24586pt.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 372.
+(babel)             in language append on input line 343.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 372.
+(babel)             in language append on input line 343.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 374.
+(babel)             in language append on input line 343.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 374.
+(babel)             in language append on input line 343.
+[3 <./Images/cm.png> <./Images/pm.png> <./Images/dungeon.png>]
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 376.
+(babel)             in language append on input line 345.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 376.
+(babel)             in language append on input line 345.
 
-<Grafieken/Variatie/Chromatic Maze/chm.pdf, id=154, 505.89pt x 361.35pt>
+Underfull \hbox (badness 1910) in paragraph at lines 353--354
+\OT1/ptm/m/n/10 mo-del-len ge-ne-reert en 100 pro-cent wil-le-keu-rige be-slis-
+
+ []
+
+
+Underfull \hbox (badness 1052) in paragraph at lines 368--370
+\OT1/ptm/m/n/10 Ten eer-ste heb ik ge-ke-ken wat de Manhattan-
+ []
+
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 379.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 379.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 379.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 379.
+[4]
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 406.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 406.
+ <Grafieken/Variatie/Chromatic Maze/chm.pdf, id=178, 505.89pt x 361.35pt>
 File: Grafieken/Variatie/Chromatic Maze/chm.pdf Graphic file (type pdf)
 
 <use Grafieken/Variatie/Chromatic Maze/chm.pdf>
 Package pdftex.def Info: Grafieken/Variatie/Chromatic Maze/chm.pdf used on inpu
-t line 387.
+t line 417.
 (pdftex.def)             Requested size: 166.94463pt x 119.24586pt.
 
-<Grafieken/Variatie/Dungeon/dungeon.pdf, id=155, 505.89pt x 361.35pt>
+<Grafieken/Variatie/Dungeon/dungeon.pdf, id=179, 505.89pt x 361.35pt>
 File: Grafieken/Variatie/Dungeon/dungeon.pdf Graphic file (type pdf)
 
 <use Grafieken/Variatie/Dungeon/dungeon.pdf>
 Package pdftex.def Info: Grafieken/Variatie/Dungeon/dungeon.pdf used on input l
-ine 393.
+ine 423.
 (pdftex.def)             Requested size: 166.94463pt x 119.24586pt.
 
-<Grafieken/Variatie/Perfect Maze/perfectmaze.pdf, id=156, 505.89pt x 361.35pt>
+<Grafieken/Variatie/Perfect Maze/perfectmaze.pdf, id=180, 505.89pt x 361.35pt>
 File: Grafieken/Variatie/Perfect Maze/perfectmaze.pdf Graphic file (type pdf)
 
 <use Grafieken/Variatie/Perfect Maze/perfectmaze.pdf>
 Package pdftex.def Info: Grafieken/Variatie/Perfect Maze/perfectmaze.pdf used o
-n input line 399.
+n input line 429.
 (pdftex.def)             Requested size: 166.94463pt x 119.24586pt.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 407.
+(babel)             in language append on input line 437.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 407.
+(babel)             in language append on input line 437.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 409.
+(babel)             in language append on input line 439.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 409.
+(babel)             in language append on input line 439.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 413.
+(babel)             in language append on input line 441.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 413.
-
-(./PaperRobinHaveneers.bbl
-Missing character: There is no â in font ptmr7t!
-Missing character: There is no € in font ptmr7t!
-Missing character: There is no ™ in font ptmr7t!
+(babel)             in language append on input line 441.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 14.
+(babel)             in language append on input line 441.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 14.
+(babel)             in language append on input line 441.
+ [5]
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 14.
+(babel)             in language append on input line 446.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 14.
- [4]
-Underfull \hbox (badness 1137) in paragraph at lines 31--36
-[]\OT1/ptm/m/n/10 Julian To-ge-lius, Noor Sha-ker, and
- []
-
-
-Underfull \hbox (badness 3690) in paragraph at lines 38--41
-[]\OT1/ptm/m/n/10 Georgios N. Yan-na-kakis
- []
-
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 419.
+(babel)             in language append on input line 446.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 419.
+(babel)             in language append on input line 460.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 419.
+(babel)             in language append on input line 460.
 Package babel Info: Redefining dutch shorthand "|
-(babel)             in language append on input line 419.
+(babel)             in language append on input line 464.
 Package babel Info: Redefining dutch shorthand "~
-(babel)             in language append on input line 419.
- [5
-
- <./Grafieken/Tijd/chm_100_log.pdf> <./Grafieken/Tijd/dungeons_100_log.pdf
-
-pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Grafieken/Tijd/dungeons_10
-0_log.pdf): PDF inclusion: multiple pdfs with page group included in a single p
-age
-> <./Grafieken/Tijd/pm_100_log.pdf
-
-pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Grafieken/Tijd/pm_100_log.
-pdf): PDF inclusion: multiple pdfs with page group included in a single page
-> <./Grafieken/Variatie/Chromatic Maze/chm.pdf
-
-pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Grafieken/Variatie/Chromat
-ic Maze/chm.pdf): PDF inclusion: multiple pdfs with page group included in a si
-ngle page
-> <./Grafieken/Variatie/Dungeon/dungeon.pdf
+(babel)             in language append on input line 464.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 464.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 464.
+ [6 <./Grafieken/Variatie/Chromatic Maze/chm.pdf> <./Grafieken/Variatie/Dungeon
+/dungeon.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Grafieken/Variatie/Dungeon
 /dungeon.pdf): PDF inclusion: multiple pdfs with page group included in a singl
@@ -759,39 +699,153 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Grafieken/Variatie/Perfect
  Maze/perfectmaze.pdf): PDF inclusion: multiple pdfs with page group included i
 n a single page
 >]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 419.
- (./PaperRobinHaveneers.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 419.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 419.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 467.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 467.
+
+Underfull \hbox (badness 10000) in paragraph at lines 472--473
+[]\OT1/ptm/m/n/10 De code om de puz-zels zelf te draaien als-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 472--473
+\OT1/ptm/m/n/10 ook de code die werd ge-bruikt om de va-ri-a-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 472--473
+\OT1/ptm/m/n/10 tie en snel-heid te be-re-ke-nen, is te vin-den op
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 472--473
+[]$\OT1/pcr/m/n/10 https : / / github . com / RobinHaveneers /
+ []
+
+(./PaperRobinHaveneers.bbl
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no ™ in font ptmr7t!
+
+Underfull \hbox (badness 1137) in paragraph at lines 55--60
+[]\OT1/ptm/m/n/10 Julian To-ge-lius, Noor Sha-ker, and
+ []
+
+
+Underfull \hbox (badness 3690) in paragraph at lines 62--65
+[]\OT1/ptm/m/n/10 Georgios N. Yan-na-kakis
+ []
+
+)
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 482.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 482.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 482.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 482.
+ [7]
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 486.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 486.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 487.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 487.
+LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
+(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 490.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 605.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 605.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 605.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 605.
+ [8]
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 641.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 641.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 723.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 723.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 723.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 723.
+ [9]
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 763.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 763.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 840.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 840.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 840.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 840.
+
+[10]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 905.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 905.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 905.
+Package babel Info: Redefining dutch shorthand "|
+(babel)             in language append on input line 905.
+Package babel Info: Redefining dutch shorthand "~
+(babel)             in language append on input line 905.
+ [11]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 905.
+
+(./PaperRobinHaveneers.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 905.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 905.
 Package rerunfilecheck Info: File `PaperRobinHaveneers.out' has not changed.
-(rerunfilecheck)             Checksum: 61CA9B84D16A44DCC47E515E78DB5E00;983.
+(rerunfilecheck)             Checksum: F5259A2330EB818E1F0B417D95A50A7A;1073.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 419.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 905.
  ) 
 Here is how much of TeX's memory you used:
- 11013 strings out of 493054
- 176030 string characters out of 6134759
- 405756 words of memory out of 5000000
- 14353 multiletter control sequences out of 15000+600000
- 25759 words of font info for 53 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 42i,11n,51p,1210b,1046s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 11529 strings out of 493054
+ 183164 string characters out of 6134759
+ 434768 words of memory out of 5000000
+ 14448 multiletter control sequences out of 15000+600000
+ 26376 words of font info for 55 fonts, out of 8000000 for 9000
+ 1143 hyphenation exceptions out of 8191
+ 42i,11n,51p,1099b,1968s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
 xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
 ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/
 2015/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2015/tex
-mf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fo
-nts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
-urw/times/utmri8a.pfb>
-Output written on PaperRobinHaveneers.pdf (5 pages, 190955 bytes).
+mf-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/2015/texmf-dist
+/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/typ
+e1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/tim
+es/utmri8a.pfb>
+Output written on PaperRobinHaveneers.pdf (11 pages, 380788 bytes).
 PDF statistics:
- 455 PDF objects out of 1000 (max. 8388607)
- 220 compressed objects within 3 object streams
- 66 named destinations out of 1000 (max. 500000)
- 175 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 892 PDF objects out of 1000 (max. 8388607)
+ 738 compressed objects within 8 object streams
+ 483 named destinations out of 1000 (max. 500000)
+ 183 words of extra memory for PDF output out of 10000 (max. 10000000)
 

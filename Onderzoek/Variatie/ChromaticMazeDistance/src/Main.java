@@ -24,6 +24,7 @@ public class Main {
 
         double startDistance = Calculator.tileDistance(firstStartTile, secondStartTile);
         double finishDistance = Calculator.tileDistance(firstFinishTile, secondFinishTile);
+        double startToFinishDistance = Math.abs((Calculator.tileDistance(firstStartTile, firstFinishTile) - Calculator.tileDistance(secondStartTile, secondFinishTile)));
 
         double restDistance = 0;
 
@@ -35,11 +36,12 @@ public class Main {
 
         startDistance = startDistance/cm1.getDimension();
         finishDistance = finishDistance/cm1.getDimension();
+        startToFinishDistance = (startToFinishDistance/cm1.getDimension())*2;
         restDistance = restDistance/((Math.pow(cm1.getDimension(),2)) * ((2*cm1.getDimension())-2));
         if(cm2.getTileList().size() == Math.pow(cm2.getDimension(),2) && restDistance == 1) {
             restDistance += 1;
         }
-        sum = (startDistance+finishDistance+restDistance)/0.03;
+        sum = (startDistance+finishDistance+restDistance+startToFinishDistance)*20;
         if(sum > 100) {
             sum =100;
         }

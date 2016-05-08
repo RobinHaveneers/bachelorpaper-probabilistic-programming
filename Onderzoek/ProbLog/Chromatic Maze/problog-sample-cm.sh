@@ -1,5 +1,5 @@
 #!/bin/bash
-# My first script
+ My first script
 if [ -f Scripts/data.txt ]
 then
     rm Scripts/data.txt

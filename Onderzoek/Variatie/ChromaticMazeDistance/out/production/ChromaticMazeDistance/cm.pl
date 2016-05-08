@@ -46,10 +46,13 @@ color(C) :-
   colors(L),
   member(C,L).
 
+
 next(red,yellow).
 next(yellow,green).
 next(green,cyan).
 next(cyan,red).
+next(blue,magenta).
+next(magenta,red).
 
 ok(C,C) :- color(C).
 ok(C1,C2) :- next(C1,C2).

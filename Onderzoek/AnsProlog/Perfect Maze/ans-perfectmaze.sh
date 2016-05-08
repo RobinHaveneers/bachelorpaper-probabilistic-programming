@@ -6,7 +6,7 @@ fi
 
 read -e -p "Specify program, use tab for completion: " file
 echo "Running AnsProlog command"
-clingo $file >> data.txt
+clingo $file --rand-freq=1 >> data.txt
 file="`cat data.txt`"
 
 for word in $file

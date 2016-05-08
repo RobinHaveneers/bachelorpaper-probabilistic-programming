@@ -7,17 +7,18 @@ Luc De~Raedt, Angelika Kimmig, and Hannu Toivonen.
   discovery.
 \newblock In Manuela~M. Veloso, editor, {\em IJCAI}, pages 2462--2467, 2007.
 
-\bibitem[\protect\citeauthoryear{Gebser \bgroup \em et al.\egroup }{}]{clingo}
+\bibitem[\protect\citeauthoryear{Gebser \bgroup \em et al.\egroup
+  }{2010}]{clingo}
 Martin Gebser, Roland Kaminski, Benjamin Kaufmann, Max Ostrowski, Torsten
   Schaub, and Sven Thiele.
-\newblock A user’s guide to gringo, clasp, clingo, and iclingo.
+\newblock A user’s guide to gringo, clasp, clingo, and iclingo, 2010.
 
-\bibitem[\protect\citeauthoryear{Lifschitz}{2008}]{vladimir}
-Vladimir Lifschitz.
-\newblock What is answer set programming?
-\newblock In {\em Proceedings of the Twenty-Third {AAAI} Conference on
-  Artificial Intelligence, {AAAI} 2008, Chicago, Illinois, USA, July 13-17,
-  2008}, pages 1594--1597, 2008.
+\bibitem[\protect\citeauthoryear{Nelson and Smith}{2015}]{togelius2015chapter8}
+Mark~J. Nelson and Adam Smith.
+\newblock Chapter 8: Asp with applications to mazes and levels.
+\newblock In Noor Shaker, Julian Togelius, and Mark~J. Nelson, editors, {\em
+  Procedural Content Generation in Games: A Textbook and an Overview of Current
+  Research}. Springer, 2015.
 
 \bibitem[\protect\citeauthoryear{Smith and Bryson}{2015}]{smith}
 Anthony~J. Smith and Joanna~J. Bryson.
@@ -25,6 +26,29 @@ Anthony~J. Smith and Joanna~J. Bryson.
   hierarchical procedural content generation in roguelike games.
 \newblock In {\em Proceedings of the 50th Anniversary Convention of the AISB}.
   2015.
+
+\bibitem[\protect\citeauthoryear{Smith and
+  Mateas}{2011}]{journals/tciaig/SmithM11}
+Adam~M. Smith and Michael Mateas.
+\newblock Answer set programming for procedural content generation: A design
+  space approach.
+\newblock {\em IEEE Trans. Comput. Intellig. and AI in Games}, 3(3):187--200,
+  2011.
+
+\bibitem[\protect\citeauthoryear{Smith \bgroup \em et al.\egroup
+  }{2011}]{journals/tciaig/SmithWM11}
+Gillian Smith, Jim Whitehead, and Michael Mateas.
+\newblock Tanagra: Reactive planning and constraint solving for
+  mixed-initiative level design.
+\newblock {\em IEEE Trans. Comput. Intellig. and AI in Games}, 3(3):201--215,
+  2011.
+
+\bibitem[\protect\citeauthoryear{Togelius \bgroup \em et al.\egroup
+  }{2011}]{togelius_guest}
+Julian Togelius, Jim Whithead, and Rafael Bidarra.
+\newblock Guest editorial: Procedural content generation in games.
+\newblock {\em IEEE Transactions on Computational Intelligence and AI in
+  Games}, 3:169 -- 171, 2011.
 
 \bibitem[\protect\citeauthoryear{Togelius \bgroup \em et al.\egroup
   }{2015}]{togelius2015introduction}
