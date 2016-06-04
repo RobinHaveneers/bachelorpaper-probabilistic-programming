@@ -1,19 +1,23 @@
 \BOOKMARK [1][-]{section.1}{Introductie}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{Generatie van spelinhoud}{section.1}% 2
-\BOOKMARK [2][-]{subsection.1.2}{AnsProlog}{section.1}% 3
-\BOOKMARK [2][-]{subsection.1.3}{ProbLog}{section.1}% 4
-\BOOKMARK [1][-]{section.2}{Probleemstelling}{}% 5
-\BOOKMARK [1][-]{section.3}{Aanpak}{}% 6
-\BOOKMARK [2][-]{subsection.3.1}{Puzzels}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.2}{Vertaling}{section.3}% 8
-\BOOKMARK [2][-]{subsection.3.3}{Analyse}{section.3}% 9
-\BOOKMARK [2][-]{subsection.3.4}{Modellering}{section.3}% 10
-\BOOKMARK [1][-]{section.4}{Resultaten}{}% 11
-\BOOKMARK [2][-]{subsection.4.1}{Snelheid}{section.4}% 12
-\BOOKMARK [2][-]{subsection.4.2}{Variatie}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.3}{Modellering}{section.4}% 14
-\BOOKMARK [1][-]{section.5}{Conclusie en toekomstig werk}{}% 15
-\BOOKMARK [1][-]{appendix.A}{ProbLog}{}% 16
-\BOOKMARK [2][-]{subsection.A.1}{Chromatic Maze}{appendix.A}% 17
-\BOOKMARK [2][-]{subsection.A.2}{Perfect Maze}{appendix.A}% 18
-\BOOKMARK [2][-]{subsection.A.3}{Dungeon}{appendix.A}% 19
+\BOOKMARK [1][-]{section.2}{Achtergrond}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{ASP en AnsProlog}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{ProbLog}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Probleemstelling en hypothese}{}% 5
+\BOOKMARK [1][-]{section.4}{Aanpak}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Puzzels}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Vertaling}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.3}{Analyse}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.4}{Modellering}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{Resultaten}{}% 11
+\BOOKMARK [2][-]{subsection.5.1}{Snelheid}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.2}{Variatie}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.3}{Modellering}{section.5}% 14
+\BOOKMARK [1][-]{section.6}{Conclusie en toekomstig werk}{}% 15
+\BOOKMARK [1][-]{appendix.A}{Algoritmes}{}% 16
+\BOOKMARK [2][-]{subsection.A.1}{Kleurafstand}{appendix.A}% 17
+\BOOKMARK [2][-]{subsection.A.2}{Gelijkaardige verbindingen}{appendix.A}% 18
+\BOOKMARK [2][-]{subsection.A.3}{Afstand tot dichtsbijzijnde vakje}{appendix.A}% 19
+\BOOKMARK [1][-]{appendix.B}{ProbLog}{}% 20
+\BOOKMARK [2][-]{subsection.B.1}{Chromatic Maze}{appendix.B}% 21
+\BOOKMARK [2][-]{subsection.B.2}{Perfect Maze}{appendix.B}% 22
+\BOOKMARK [2][-]{subsection.B.3}{Dungeon}{appendix.B}% 23

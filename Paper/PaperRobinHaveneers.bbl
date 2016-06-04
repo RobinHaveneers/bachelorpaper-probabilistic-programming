@@ -7,11 +7,35 @@ Luc De~Raedt, Angelika Kimmig, and Hannu Toivonen.
   discovery.
 \newblock In Manuela~M. Veloso, editor, {\em IJCAI}, pages 2462--2467, 2007.
 
+\bibitem[\protect\citeauthoryear{Dijkstra}{1959}]{Dijkstra1959}
+E.~W. Dijkstra.
+\newblock A note on two problems in connexion with graphs.
+\newblock {\em Numerische Mathematik}, 1(1):269--271, 1959.
+
+\bibitem[\protect\citeauthoryear{Fierens \bgroup \em et al.\egroup
+  }{2015}]{FierensTPLP15}
+Daan Fierens, Guy {Van den Broeck}, Joris Renkens, Dimitar Shterionov, Bernd
+  Gutmann, Ingo Thon, Gerda Janssens, and Luc {De Raedt}.
+\newblock Inference and learning in probabilistic logic programs using weighted
+  {Boolean} formulas.
+\newblock {\em Theory and Practice of Logic Programming}, 15:358--401, 5 2015.
+
 \bibitem[\protect\citeauthoryear{Gebser \bgroup \em et al.\egroup
   }{2010}]{clingo}
 Martin Gebser, Roland Kaminski, Benjamin Kaufmann, Max Ostrowski, Torsten
   Schaub, and Sven Thiele.
 \newblock A user’s guide to gringo, clasp, clingo, and iclingo, 2010.
+
+\bibitem[\protect\citeauthoryear{Gebser \bgroup \em et al.\egroup
+  }{2012}]{Gebser12conflict-drivenanswer}
+Martin Gebser, Benjamin Kaufmann, and Torsten Schaub.
+\newblock Conflict-driven answer set solving: From theory to practice, 2012.
+
+\bibitem[\protect\citeauthoryear{Mendelson}{1987}]{cnf}
+Elliott Mendelson.
+\newblock {\em Introduction to Mathematical Logic; (4th Ed.)}.
+\newblock Wadsworth and Brooks/Cole Advanced Books \& Software, Monterey, CA,
+  USA, 1987.
 
 \bibitem[\protect\citeauthoryear{Nelson and Smith}{2015}]{togelius2015chapter8}
 Mark~J. Nelson and Adam Smith.

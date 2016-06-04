@@ -6,20 +6,30 @@
 \usepackage[dutch]{babel}
 \usepackage{listings}
 \usepackage{fancybox}
+\usepackage{algorithm,algpseudocode}% http://ctan.org/pkg/{algorithms,algorithmicx}
 \usepackage{times}
 \usepackage{cleveref}
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{lipsum}
 \usepackage{graphicx}
+\usepackage{amssymb}
 \usepackage{xcolor}
 \usepackage{textcomp}
 \usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{amsmath}
 
 \usepackage[space]{grffile}
 
 \hyphenation{Prob-Log}
 \hyphenation{Ans-Pro-Log}
+
+\algrenewcommand\algorithmicindent{0.7em}%
+
+\makeatletter
+\algrenewcommand\ALG@beginalgorithmic{\footnotesize}
+\makeatother
 
 \makeatletter
 \newenvironment{CenteredBox}{% 
@@ -182,7 +192,7 @@
   captionpos = below,
   frame      = single,
   columns    = fullflexible,
-  basicstyle = \ttfamily,
+  basicstyle=\footnotesize\ttfamily,
 }
 
 \title{Genereren van spelinhoud met probabilistisch programmeren \\ \Large{Een onderzoek naar de toepasbaarheid van ProbLog}}
@@ -196,114 +206,116 @@ robin.haveneers@student.kuleuven.be}
 \maketitle
 
 \begin{abstract}
-Deze paper bespreekt de toepasbaarheid van Prob-\\Log op het gebied van procedurale creatie van spelinhoud. In dit onderzoek wordt ProbLog vergeleken met ASP. Problog en ASP zijn beide declaratieve talen waarbij het grote verschil is dat ProbLog gebruik maakt van kansen. Het onderzoek wordt gevoerd op het gebied van snelheid, variatie en modellering en of op deze vlakken ProbLog voordelen biedt dankzij het gebruik van kansen. Uit de resultaten van dit onderzoek kan worden afgeleid dat op vlak van snelheid ProbLog het niet haalt van AnsProlog. ProbLog bereikt echter wel een veel grotere variatie in gegenereerde oplossingen die voldoen aan het gevraagde model. ProbLog biedt dankzij zijn probabilistisch aspect ook een aantal interessante modelleringsvoordelen. We besluiten dat ProbLog in de praktijk goede mogelijkheden biedt op vlak van game content generation indien variatie de belangrijkste factor is en snelheid meer van ondergeschikt belang is.
+Deze paper bespreekt de toepasbaarheid van ProbLog op het gebied van procedurele creatie van spelinhoud. In dit onderzoek wordt ProbLog vergeleken met ASP. Problog en ASP zijn beide declaratieve talen waarbij het grote verschil is dat ProbLog gebruik maakt van kansen. Het onderzoek wordt gevoerd op het gebied van snelheid, variatie en modellering en of ProbLog op deze vlakken voordelen biedt dankzij het gebruik van kansen. Uit de resultaten van dit onderzoek kan worden afgeleid dat op vlak van snelheid ProbLog het niet haalt van AnsProlog. ProbLog bereikt echter wel een veel grotere variatie in gegenereerde oplossingen die voldoen aan het gevraagde model. ProbLog biedt dankzij zijn probabilistisch aspect ook een aantal interessante modelleringsvoordelen. We besluiten dat ProbLog in de praktijk goede mogelijkheden biedt op vlak van game content generation indien variatie de belangrijkste factor is en snelheid meer van ondergeschikt belang is.
 \end{abstract}
 
 \section{Introductie}
-Generatie van spelinhoud (Engels: ``game content generation'') is een belangrijk onderdeel bij het ontwikkelen van eender welk soort spel en is ook al een gevestigd onderzoeksdomein. Het gebruik van Answer Set Programming (ASP) voor het genereren van spelinhoud is echter nog nieuw. Vanaf 2011 zijn onderzoekers begonnen met de toegevoegde waarde te onderzoeken van ASP op gebied van \textit{game content generation}. Zie \cite{yannakakis} en \cite{smith}. Alvorens dieper in te gaan op het onderzoek, geef ik in deze introductie relevante achtergrondinformatie.
-
-	\subsection{Generatie van spelinhoud}
-	Het proceduraal genereren van spelinhoud is gedefinieerd als \textit{``het genereren van spelinhoud aan de hand van een algoritme met gelimiteerde of indirecte invoer van de gebruiker"} \cite{togelius2015introduction}. Met andere woorden: het gaat over software die met \'e\'en soort beschrijving verschillende sets van spelinhoud kan genereren.
+Generatie van spelinhoud (Engels: ``game content generation'') is een belangrijk onderdeel bij de ontwikkeling van eender welk soort spel en is ook inmiddels een gevestigd onderzoeksdomein. Het procedureel genereren van spelinhoud is gedefinieerd als \textit{``het genereren van spelinhoud aan de hand van een algoritme met gelimiteerde of indirecte invoer van de gebruiker''} \cite{togelius2015introduction}. Met andere woorden: het gaat over software die met \'e\'en soort beschrijving verschillende sets van spelinhoud kan genereren.
+Onder `inhoud' verstaan we onder andere rekwisieten (wapens, kisten, muntjes \dots), evenals plattegronden en speelwerelden (kerker, platform, onder water \dots). Het spelmechanisme (``game engine'') zelf en de AI achter niet-speelbare personages vallen niet onder deze definitie van spelinhoud.
 	
-	Onder `inhoud' verstaan we onder meer rekwisieten (wapens, kisten, muntjes \dots), maar ook plattegronden en speelwerelden (kerker, platform, onder water \dots).
-	
-	 Het spelmechanisme (``game engine'') zelf en de AI achter niet-speelbare personages vallen niet onder deze definitie van spelinhoud.
-	\subsection{AnsProlog}
-Zoals vermeld is Answer Set Programming (ASP) reeds goed bestudeerd op het gebied van game content generation \cite{togelius2015chapter8}, \cite{togelius_guest}, \cite{journals/tciaig/SmithWM11}. ASP is een vorm van declaratief programmeren gericht op moeilijke (NP-harde) zoekproblemen. Het is vooral bruikbaar in kennis-intensieve toepassingen, maar kan ook makkelijk gebruikt worden voor zijn generatieve mogelijkheden. Een ASP-programma is dus een programma dat kennis beschrijft, en niet de uitvoering van het programma. Er wordt beschreven \textit{wat} moet berekend worden en niet \textit{hoe}. Op het gebied van generatie van spelinhoud kan in zulke programma's dus beschreven worden aan welke voorwaarden de spelinhoud moet voldoen. In het programma wordt het ontwerp van de inhoud die dient te worden gegenereerd beschreven om nadien een bepaalde answer set, een mogelijke beschrijving van een wereld die voldoet aan het ontwerp, te berekenen.
+Het gebruik van Answer Set Programming (ASP) voor de generatie van spelinhoud is echter nog nieuw, maar wel reeds goed bestudeerd \cite{togelius2015chapter8}, \cite{togelius_guest}, \cite{journals/tciaig/SmithWM11}. Vanaf 2011 zijn onderzoekers begonnen met de toegevoegde waarde te onderzoeken van ASP op gebied van \textit{game content generation}, zie \cite{yannakakis} en \cite{smith}. 
+Alvorens dieper in te gaan op het onderzoek, wordt relevante achtergrondinformatie gegeven.
+		
+\section{Achtergrond}
+	\subsection{ASP en AnsProlog}
+ASP is een vorm van declaratief programmeren gericht op moeilijke (NP-harde) zoekproblemen. Het is voornamelijk bruikbaar in kennis-intensieve toepassingen, maar kan ook gebruikt worden voor zijn generatieve mogelijkheden. In een ASP-programma wordt beschreven \textit{wat} moet berekend worden en niet \textit{hoe}. Bij game content generation wordt in het programma het ontwerp van de spelinhoud beschreven. Aan de hand van dit programma wordt een answer set, een geldige beschrijving van een wereld die voldoet aan het ontwerp, berekend.
 
-De ASP-programma's beschouwd in deze paper, en waarop deze paper verder bouwt, zijn geschreven in AnsProlog: een syntax met regels vergelijkbaar aan Prolog, maar tegelijk ook verschillend van Prolog door onder meer de mogelijkheid om ``keuze-regels'' of ``niet deterministische regels'' te defini\"eren.Een voorbeed hiervan is \texttt{\{s,t\} :- p}, wat zo veel wil zeggen als: ``als \texttt{p} in het model voorkomt, kies dan willekeurig welk van de atomen \texttt{s,t} (\texttt{s}, of \texttt{t}, of \texttt{s} en \texttt{t}, of geen van beide) worden toegevoegd''. Op deze keuze-regels kunnen ook numerieke onder- en bovengrenzen worden opgelegd: zo zegt \texttt{1\{s,t\}1 :- p} dat er exact \'e\'en zal worden toegevoegd. Een andere uitbreiding op de syntax ten opzichte van Prolog is de mogelijkheid om voorwaarden of constraints te bepalen die altijd waar of net nooit waar moeten zijn. Beschouw de volgende regels als voorbeelden:
+De ASP-programma's beschouwd in deze paper zijn geschreven in AnsProlog: een syntax vergelijkbaar aan Prolog. AnsProlog biedt de mogelijkheid om ``keuzeregels'' of ``niet deterministische regels'' met numerieke boven- en/of ondergrenzen te defini\"eren. Een voorbeeld hiervan is 
+
+\begin{center}
+\texttt{1\{s,t\}1 :- p} 
+\end{center}
+
+\noindent dit wil zeggen: ``als \texttt{p} in het model voorkomt, kies dan willekeurig exact \'e\'en van de atomen \texttt{s,t} (dus \texttt{s}, of \texttt{t}) dat wordt toegevoegd''. Een andere uitbreiding op de syntax is de mogelijkheid om voorwaarden of constraints te bepalen die altijd waar moeten of net nooit waar mogen zijn, dit zijn ``integrity constraints'' of ``integriteitsvoorwaarden''. Beschouw de volgende regels als voorbeelden:
 
 \begin{center}
 \texttt{:- not victory} en \texttt{:- birds}.
 \end{center}
 
-Deze regels bepalen respectievelijk dat \texttt{victory} altijd moet optreden, en dat \texttt{birds} nooit mag optreden (de betekenis hiervan is verder niet relevant). Elke oplossing, elke ``answer set'', voldoet aan deze regels.
+Deze regels bepalen respectievelijk dat \texttt{victory} altijd moet optreden, en dat \texttt{birds} nooit mag optreden in de ``answer set''.
+
+Het vinden van antwoorden, mogelijke modellen op deze ASP-programm's berust op het vertalen van het programma in een Booleaanse formule om er nadien een SAT-solver op toe te passen. In een volgende paragraaf wordt toegelicht dat de solver gebruikt in deze paper, \texttt{clingo}, dit patroon volgt en gebruik maakt van state-of-the-art algoritmes op vlak van Boolean constraint solving.
+
 	\subsection{ProbLog}
-	ProbLog is een probabilistische uitbreiding op Prolog \cite{raedt07problog}. Uniek aan ProbLog is dat voor elke regel kan gespecificeerd worden met welke kans deze regel optreedt, een voorbeeld hiervan is het volgende: \texttt{p::friend(A,B).}. Deze regel zegt dat \texttt{A} bevriend is met \texttt{B} met een kans \texttt{p}.
+	ProbLog is een probabilistische uitbreiding op Prolog \cite{raedt07problog}. Een ProbLog-programma bestaat uit twee delen: feiten met een kans geannoteerd en een set van regels en niet-geannoteerde feiten. Een voorbeeld van een feit met een kans is het volgende: \texttt{p::friend(a,b).}. Deze regel zegt dat \texttt{a} bevriend is met \texttt{b} met een kans \texttt{p}.
 
-In een ProbLog-programma geef je ook bepaalde \textit{queries}, `vragen' op. Bekijk daarvoor het onderstaande voorbeeld . 
-	\begin{lstlisting}[language=Prolog-pretty]
-0.5 :: color(green).
-0.5 :: color(red).
+Een ProbLog-programma beschrijft een kansverdeling over alle mogelijke werelden die gegenereerd kunnen worden met het programma. Elk feit van de vorm \texttt{p::f} geeft je de keuze, ofwel behoort \texttt{f} tot het model met kans $p$ ofwel behoort het niet tot het model met een kans $1-p$. Een totaalkeuze is nu een subset van alle mogelijke probabilistische feiten. Als er dus $n$ feiten zijn met een keuze, zijn er $2^n$ totaalkeuzes. De kans dat een bepaalde wereld een geldig model is van het ProbLog-programma, is gelijk aan zijn totaalkeuze. De kans op een wereld dat geen geldig model is is $0$.
 
-query(color(C)).
-\end{lstlisting}
+ProbLog biedt nu de mogelijkheid om een programma te samplen. Dit samplen zal een bepaald aantal mogelijke modellen (afhankelijk van het gekozen aantal) terug geven. ProbLog doet aan rejection based sampling. Het genereert dus een set van werelden, haalt daar diegene uit die niet voldoen aan bepaalde voorwaarden uit het programma, haalt nadien diegene er uit die niet voldoen aan de query en geeft uit de overblijvende werelden \'e\'en terug. Indien er \texttt{evidence}, de integriteitsvoorwaarden, wordt opgegeven met een heel kleine kans, is de kans dat het gegenereerde sample daaraan voldoet ook zeer klein, waardoor rejection based sampling lang kan duren.
 
-ProbLog biedt de mogelijkheid een programma te sampelen. Bij het sampelen genereert ProbLog een mogelijke toekenning aan de opgegeven queries. Als het bovenstaande programma wordt gesampeld, zijn er drie mogelijke oplossingen:
-\begin{itemize}
-\item \texttt{color(red).}
-\item \texttt{color(green).}
-\item \texttt{color(green).} en \texttt{color(red).}
-\item lege oplossing
+Aan de hand van inferentie kan ProbLog antwoorden vinden op de queries die worden meegegeven aan een ProbLog-programma. Deze inferentie gebeurt in twee stappen.
+
+In de eerste stap wordt het programma samen met de evidence en de queries omgezet naar een gewogen Booleaanse formule om nadien op die formule inferentie uit te voeren. In deze stap wordt een variabel-vrij programma gezocht voor de opgegeven queries en evidence, vervolgens wordt dit programma omgezet in een logische formule en nadien herwerkt naar de overeenkomstige conjunctieve normaalvorm (CNF) \cite{cnf}. Deze wordt tenslotte herwerkt naar zijn gewogen vorm: als het programma een regel \texttt{p::f} bevat, kennen we aan \texttt{f} de kans $p$ toe en aan \texttt{$\neg$f} de kans $1-p$.
+
+In een tweede stap wordt inferentie uitgevoerd op de bekomen gewogen formule. Er zijn drie inferentie-taken die kunnen worden uitgevoerd, \textbf{MARG}, \textbf{EVID} en \textbf{MPE}.
+\begin{enumerate}
+\item Bij \textbf{MARG} is het de bedoeling voor een gegeven aantal queries de marginale kansverdeling van zo'n query, gegeven een bepaalde observatie te berekenen, of nog: $P(Q | E)$ met $Q$ de kans en $E$ de evidence.
+\item \textbf{EVID} of `de kans van evidence' is het berekenen met welke kans bepaalde evidence voorkomt in de modellen, of: $P(E)$.
+\item \textbf{MPE} zoekt naar de meest waarschijnlijke combinatie van alle niet-evidence predicaten, gegeven de evidence.
+\end{enumerate}
+ProbLog berust hoofdzakelijk op de \textbf{MARG} inferentie methode: het berekenen van de kans op slagen van een query. Zie ook \cite{FierensTPLP15}.
+
+\section{Probleemstelling en hypothese}
+De probleemstelling van dit onderzoek baseert zich op de volgende vragen:
+\begin{itemize}[leftmargin=6mm]
+\item[\textbf{Q$_1$}] Is het ProbLog-systeem geschikt om inhoud van spellen te genereren? 
+\item[\textbf{Q$_2$}] Hoe scoort ProbLog ten opzichte van ASP/AnsProlog op vlak van snelheid en variatie?
+\item[\textbf{Q$_3$}] Wat zijn de modellerings voor- en nadelen bij het gebruik van ProbLog? 
 \end{itemize}
-	
-	Het sampelen geeft dus \'e\'en of meerdere mogelijkheden uit die subprogramma's (afhankelijk van hoeveel resultaten worden gesampelt).
 
- Verder is het in een ProbLog-programma ook mogelijk om \texttt{evidence} te voorzien. Elke sample gegenereerd met het programma zal voldoen aan deze gegeven \texttt{evidence}. Zo kan het volgende schrijven geschreven worden: \texttt{evidence(friend(C,D)).} wat betekent dat persoon \texttt{C} altijd bevriend moet zijn met persoon \texttt{D}, in elke mogelijke oplossing van het programma.
-
-
-ProbLog verschilt van ASP doordat het niet-determinisme in ASP niet hetzelfde is als een kansverdeling, waarvan wel gebruik wordt gemaakt in ProbLog. ProbLog hanteert dus effectieve willekeurigheid, die in ASP niet van toepassing is. Deze paper onderzoekt dus de toepasbaarheid en de mogelijkheden, maar tegelijk ook de limieten en nadelen van de willekeurigheid van ProbLog op het gebied van game content generation.
-
-\section{Probleemstelling}
-De probleemstelling in dit onderzoek is als volgt geformuleerd: is ProbLog toepasbaar op het vlak van `game content generation'? Is het systeeem daar voldoende geschikt voor? Op welke manieren kan de probabilistische kant van ProbLog een voordeel bieden bij het genereren van spelinhoud? Wat zijn de voor- en nadelen bij het gebruik van ProbLog? 
-
-In deze paper wordt een vergelijking van ProbLog en ASP gemaakt aan de hand van drie soorten puzzels die worden onderlegd aan een aantal criteria. De hypothese is dat de probabilistische kant van ProbLog zeker een voordeel kan bieden bij het genereren van spelinhoud maar dat het systeem, zoals het nu is, niet snel genoeg is om een groot praktisch voordeel te bieden.
+In deze paper wordt een vergelijking van ProbLog en ASP gemaakt, steunend op drie soorten puzzels die worden onderlegd aan een aantal criteria. De hypothese is dat de probabilistische kant van ProbLog een voordeel kan bieden bij het genereren van spelinhoud.
  
 \section{Aanpak}
-In dit deel van het onderzoek zal ik toelichten hoe ik mijn experimenten heb opgezet en uitgevoerd. De resultaten van deze experimenten worden dan besproken in de volgende paragraaf.
-
- In mijn onderzoek heb ik voor het oplossen van de ASP-programma's, geschreven in AnsProlog, gebruik gemaakt van  \texttt{clingo} uit het Potassco-pakket\footnote{Potsdam Answer Set Solving Collection, \\\url{http://potassco.sourceforge.net/}}. \texttt{clingo} is de combinatie van een grounder, \texttt{gringo} die de programma's variabel vrij maakt en een solver, namelijk \texttt{clasp}, die answer sets berekent \cite{clingo}. 
+In dit onderzoek wordt voor de uitvoering van de ASP-programma's, geschreven in AnsProlog, gebruik gemaakt van  \texttt{clingo} uit het Potassco-pakket\footnote{Potsdam Answer Set Solving Collection, \\\url{http://potassco.sourceforge.net/}}. \texttt{clingo} is de combinatie van een grounder, \texttt{gringo} die de programma's variabel vrij maakt en een solver, namelijk \texttt{clasp}, die answer sets berekent \cite{clingo} aan de hand van een conflict-gedreven solver gebruikmakend van technieken uit het SAT-onderzoeksdomein. \cite{Gebser12conflict-drivenanswer}. 
 
 	\begin{figure*}[t]
 \centering
-\begin{subfigure}{.25\textwidth}
+\begin{subfigure}{.18\textwidth}
   \centering
   \includegraphics[width=\linewidth]{Images/cm.png}
   \caption{}
   \label{fig:cm}
 \end{subfigure}%
-\hspace{.083\textwidth}
-\begin{subfigure}{.25\textwidth}
+\hspace{.085\textwidth}
+\begin{subfigure}{.20\textwidth}
   \centering
   \includegraphics[width=\linewidth]{Images/pm.png}
   \caption{}
   \label{fig:pm}
 \end{subfigure}
-\hspace{.083\textwidth}
-\begin{subfigure}{.25\textwidth}
+\hspace{.085\textwidth}
+\begin{subfigure}{.18\textwidth}
   \centering
   \includegraphics[width=\linewidth]{Images/dungeon.png}
   \caption{}
   \label{fig:dung}
 \end{subfigure}
-\caption{Voorbeeld van een mogelijke \textit{chromatic maze} met oplossing (a) , en \textit{perfect maze} (b) een \textit{dungeon} (c)}
+\caption{Voorbeeld van een geldige \textit{chromatic maze} met oplossing (a) , en \textit{perfect maze} (b) een \textit{dungeon} (c)}
 \label{fig:test}
 \end{figure*}	
 
 	\subsection{Puzzels}
-	Voor dit onderzoek heb ik gebruik gemaakt van drie puzzels. Sommige experimenten gebruiken echter een vereenvoudigde versie van de desbetreffende puzzel indien dit duidelijker was voor het experiment of wanneer het uitvoeren van programma's met de meer complexere voorwaarden te veel tijd in beslag zou nemen.
-	
-	De drie puzzels waren de \textit{chromatic maze}, \textit{perfect maze} en de \textit{dungeon}. Ik zal een korte beschrijving geven van deze puzzels.
+	Voor dit onderzoek wordt beroep gedaan op drie soorten puzzels. De drie puzzels zijn de \textit{chromatic maze}, \textit{perfect maze} en de \textit{dungeon}. 
 	\subsubsection*{Chromatic Maze}
-	De \textit{chromatic maze} (cfr. \cite{journals/tciaig/SmithM11}, figuur \ref{fig:cm}) is een altijd vierkante puzzel en is een soort doolhof waarbij  elk vakje een bepaalde kleur uit een kleurenwiel heeft. Om de puzzel op te lossen moet een bepaald pad van start naar finish over de vakjes gevonden worden. Een overgang van het ene vakje naar een ander vakje is enkel toegelaten wanneer de kleurenovergang die optreedt zich in het gegeven kleurenwiel bevindt (bijvoorbeeld: vakje 1 is rood en vakje 2 is groen, dan moet om de overgang van 1 naar 2 geldig te maken rood naast groen in het kleurenwiel staan).
+	De \textit{chromatic maze} (cfr. \cite{journals/tciaig/SmithM11}, figuur \ref{fig:cm}) is een steeds vierkante puzzel en is een soort doolhof waarbij  elk vakje een kleur uit een kleurenwiel heeft. Om de puzzel op te lossen moet een pad van start naar finish over de vakjes gevonden worden. Een overgang van het ene vakje naar een ander vakje is enkel toegelaten als de kleurenovergang die optreedt een overgang is in het gegeven kleurenwiel, met de klok mee of tegen de klok in.
 	
 	\subsubsection*{Perfect Maze}
-	De \textit{perfect maze} (cfr. \cite{togelius2015chapter8}, figuur \ref{fig:pm}) is een altijd vierkante puzzel en is simpelweg een perfect doolhof: vanuit elke positie kan een pad gemaakt worden naar het vakje linksboven \texttt{(1,1)}. Hierdoor zal de puzzel ook altijd een pad bevatten van het vakje linksboven tot het vakje rechstonder.
+	De \textit{perfect maze} (cfr. \cite{togelius2015chapter8}, figuur \ref{fig:pm}) is een steeds vierkante puzzel en is een perfect doolhof, dit wil zeggen dat vanuit elke positie een pad kan gemaakt worden naar het vakje linksboven \texttt{(1,1)}. Daardoor zal de puzzel steeds een pad bevatten van het vakje linksboven tot het vakje rechtsonder.
 	
 		\subsubsection*{Dungeons}
-	Een \textit{dungeon} is zoals de naam zegt een soort kerker (cfr. \cite{togelius2015chapter8}, figuur \ref{fig:dung}). De \textit{dungeon} is altijd perfect vierkant. In deze voorstelling van een kerker is er \'e\'en altaar, \'e\'en diamantje en een bepaald aantal muren. De rest van de vakjes hebben geen bepaalde eigenschap. De gedachtengang van zo'n \textit{dungeon} is om zich van de ingang naar de diamant te begeven, deze op te rapen, de diamant naar het altaar te brengen om zo de uitgang te openen en zich tenslotte naar die geopende uitgang te begeven. Aan dit soort werelden kan een heel aantal contstraints worden toegekend: de verhouding muren ten opzichte van het aantal lege vakjes, de afstand tussen de diamant en het altaar ... Tenzij anders vermeld, gebruik ik voor al mijn experimenten een \textit{dungeon} waarbij er exact \'e\'en diamant en \'e\'en altaar is en waarbij voor de rest van de vakjes, willekeurig, ofwel een muur ofwel niks wordt gezet.
+	Een \textit{dungeon} is een representatie van een soort kerker (cfr. \cite{togelius2015chapter8}, figuur \ref{fig:dung}). De \textit{dungeon} is altijd perfect vierkant. In deze voorstelling van een kerker is er \'e\'en altaar (\texttt{A}), \'e\'en diamantje (\texttt{G}) en een variabel aantal muren (\texttt{W}). De rest van de vakjes hebben geen specifieke eigenschap. De gedachtegang van zo'n \textit{dungeon} is om zich van de ingang naar de diamant te begeven, deze op te rapen, de diamant naar het altaar te brengen om zo de uitgang te openen en zich tenslotte naar die geopende uitgang te begeven. Tenzij anders vermeld, wordt voor al de experimenten een \textit{dungeon} gebruikt waarbij er exact \'e\'en diamant en \'e\'en altaar is en waarbij voor de rest van de vakjes, willekeurig, ofwel een muur ofwel niks wordt gezet.
 			
 	\subsection{Vertaling}
-	Het eerste deel van mijn onderzoek bestond er in de AnsProlog-programma's die de eerdergenoemde puzzels beschreven, om te vormen tot ProbLog-programma's. Uiteraard moest er rekening moest gehouden worden met de constraints die ook aanwezig waren in de AnsProlog-programma's. Aangezien AnsProlog en ProbLog beiden varianten zijn op Prolog, was dit over het algemeen niet moeilijk. Ze hebben beide functionaliteiten verschillend van Prolog, maar ook van elkaar. Zo biedt AnsProlog de mogelijkheid tot het invoeren van niet-determinisitische regels alsook het neerschrijven van bepaalde voorwaarden die altijd waar of net nooit waar mogen zijn. Je vindt de vertalingen van de puzzels in ProbLog, met commentaar als leidraad, in de appenidces.
+	Het eerste deel van dit onderzoek bestond er in de AnsProlog-programma's, die de eerdergenoemde puzzels beschreven, om te vormen tot ProbLog-programma's. Er moet rekening gehouden worden met de constraints die aanwezig zijn in de AnsProlog-programma's. Aangezien AnsProlog en ProbLog beiden varianten zijn op Prolog, vormde dit geen noemenswaardige problemen. Ze hebben beide functionaliteiten verschillend van Prolog, maar evenzo verschillend van elkaar. De vertalingen van de puzzels in ProbLog, met commentaar als leidraad, staan in de appendices. De vertalingen zijn gebaseerd op de puzzels gegeven in \cite{journals/tciaig/SmithM11} en \cite{togelius2015chapter8}. De vertaling gebeurde op hoog-niveau waardoor enkele stukken zonder veel moeite konden worden overgenomen. De kern van de puzzels is niet veranderd ten opzichte van de ASP-tegenhanger: ze hebben dezelfde eigenschappen en hetzelfde `doel'.
 	
-Het eerste aspect van de vertaling was de omzetting van de niet-deterministische kansen uit AnsProlog naar ProbLog. Zo zegt de AnsProlog-regel hieronder dat voor elke tegel (elk paar van $x$ en $y$ co\"ordinaten) exact \'e\'en kleur uit alle mogelijke kleuren moet worden toegekend. Dit komt uit het voorbeeld van de \textit{chromatic maze}.
+Het eerste aspect van de vertaling was de omzetting van de niet-deterministische regels uit AnsProlog naar ProbLog. Zo zegt de AnsProlog-regel hieronder dat voor elke tegel, elk paar van $x$ en $y$ co\"ordinaten, exact \'e\'en kleur uit alle mogelijke kleuren moet worden toegekend. Dit komt uit het voorbeeld van de \textit{chromatic maze}.
 	 
 \begin{lstlisting}[language=Prolog-pretty]
-1{cell(C,X,Y)}:color(C)}1 
+1{cell(C,X,Y):color(C)}1 
  :- dim(X), dim(Y).
 \end{lstlisting}
 
-E\'en mogelijke manier om dit in ProbLog te vertalen is door te zeggen dat voor elke \texttt{t}, \'e\'en kleur uniform moet worden geselecteerd uit de lijst van alle kleuren. De code die dit uitdrukt, staat hieronder.
+E\'en mogelijke manier om dit in ProbLog te vertalen is door te zeggen dat voor elke \texttt{tile(X,Y,C)} met \texttt{X} en \texttt{Y} respectievelijk het x- en y-co\"ordinaat, \'e\'en kleur \texttt{C} uniform moet worden geselecteerd uit de lijst van alle kleuren. De code die dit uitdrukt, staat hieronder.
 \begin{lstlisting}[language=Prolog-pretty]
 tile(X,Y,C) :-
   dim(X),
@@ -314,11 +326,11 @@ tile(X,Y,C) :-
 
 Analoge voorbeelden waren er bij de \textit{perfect maze} waarbij de verbonden tile uniform wordt gekozen uit de 4 mogelijkheden: verbonden met een vakje links, rechts, boven of onder. 
 
-Een ander interessant aspect kwam aan bod bij een alternatieve vorm van deze puzzel. Daarbij was het de bedoeling om zo veel mogelijk horizontale, en dus zo wenig mogelijk verticale, verbindingen te hebben. Het doolhof vertrekt dan van linksboven en maakt een soort slangbeweging tot rechtsonder. 
+Een ander interessant aspect kwam aan bod bij een alternatieve vorm van deze puzzel. Daarbij was het de bedoeling om een maximaal aan horizontale, en bijgevolg een minimaal aantal verticale, verbindingen te hebben. Het doolhof vertrekt zo van linksboven en maakt een soort slangbeweging tot rechtsonder. 
 
-In AnsProlog kan dit gemodelleerd worden door eerst te defini\"eren, aan de hand van een regel, wat een verticale verbinding is en nadien een zogenoemde `minimize'-constraint op te leggen op deze verticale verbindingen. Een vergelijkbaar resultaat kon in ProbLog verkregen worden door in plaats van de verbinding uniform te laten kiezen, de keuze niet-uniform te maken door gewichten toe te kennen aan de kansen. Zo is er in ProbLog \texttt{select\_weighted} in de plaats van \texttt{select\_uniform}. De horizontale verbindingen krijgen een kans van beide 45\% en de verbinding boven en onder een kans van nog elk 2.5\%. De gegenereerde puzzels zijn nagenoeg altijd puzzels met een maximaal aantal horizontale verbindingen.
+In AnsProlog kan dit gemodelleerd worden door eerst te defini\"eren, op basis van een regel, wat een verticale verbinding is en daarna een zogenoemde `minimize'-constraint op te leggen op deze verticale verbindingen. Een vergelijkbaar resultaat kon in ProbLog verkregen worden door, in plaats van de verbinding uniform te laten kiezen, de keuze niet-uniform te maken door gewichten toe te kennen aan de kansen met \texttt{select\_weighted}. De horizontale verbindingen krijgen een kans van beide 45\% en de verbinding boven en onder een kans van nog elk 5\%. De gegenereerde puzzels zijn nagenoeg altijd puzzels met een maximaal aantal horizontale verbindingen.
 
-Verder was er in AnsProlog ook de mogelijkheid om bepaalde voorwaarden op te leggen die nooit of net altijd moesten voorkomen. Een voorbeeld hiervan is de voorwaarde die zegt dat er altijd \texttt{victory} moet zijn en dat deze moet bereikt worden in minder dan \texttt{max\_solution} en meer dan \texttt{min\_solution} stappen.
+Verder zijn er in AnsProlog ook de integriteitsvoorwaarden. Een voorbeeld hiervan is de voorwaarde die zegt dat er steeds \texttt{victory} moet zijn en dat deze moet bereikt worden in minder dan \texttt{max\_solution} en meer dan \texttt{min\_solution} stappen. Met \texttt{victory} bedoelen we het feit dat er in de \textit{chromatic maze} een geldig kleurenpad bestaat van start naar finish.
 
 \begin{lstlisting}[language=Prolog-pretty]
 :- not victory.
@@ -326,91 +338,90 @@ Verder was er in AnsProlog ook de mogelijkheid om bepaalde voorwaarden op te leg
 :- victory_at(T), max_solution < T.
 \end{lstlisting}
 
-In ProbLog kunnen we een analoge constraint opleggen aan de hand van \texttt{evidence}, waarmee we willen zeggen dat elke toekenning moet voldoen aan \texttt{victory}.
+In ProbLog is het mogelijk een analoge constraint op te leggen door middel van \texttt{evidence}, waarmee wordt bedoeld dat elke toekenning moet voldoen aan \texttt{victory}.
 \begin{lstlisting}[language=Prolog-pretty,xleftmargin=0\textwidth,xrightmargin=.0\textwidth]]
 victory :- victory_at(T), time(T).
-
 victory_at(T) :-
   max_sol(Max),
   min_sol(Min),
   time(T),
+  T > min_sol,
+  T < max_sol,
   finish(X,Y),
   player_at(T, X, Y).
-  
 evidence(victory).
 \end{lstlisting}
 
-Een alternatieve aanpak voor deze evidence is om er voor te zorgen dat werelden met deze bepaalde constraints gewoon nooit kunnen voorkomen. Zo was er bij de \textit{dungeon} de voorwaarde dat er maximaal \'e\'en diamant en \'e\'en altaar konden zijn. Dit kan in ProbLog voorgesteld worden aan de hand van \texttt{evidence}, maar een andere aanpak is door uit de lijst van vakjes eerst twee tiles te kiezen die respectievelijk de diamant en het altaar zijn en uit de overblijvende vakjes te selecteren welke vakjes muren worden en welke leeg blijven. Deze twee alternatieve aanpakken, en welke nu een voordeel biedt op vlak van modellering worden verder nog besproken.
+Een alternatieve aanpak voor deze \texttt{evidence} is om expliciet deze constraints in je programma neer te schrijven en er zo voor te zorgen dat geen evidence moet voorzien worden. Zo was er bij de \textit{dungeon} de voorwaarde dat er maximaal \'e\'en diamant en \'e\'en altaar konden zijn. De alternatieve aanpak is door uit de lijst van vakjes eerst twee tiles te kiezen die respectievelijk de diamant en het altaar zijn en uit de overblijvende vakjes te selecteren welke vakjes muren worden en welke leeg blijven. Deze aanpak en de aanpak met \texttt{evidence} samen met hun voor- en nadelen, worden verder nog besproken.
 	
 	\subsection{Analyse}
-Het meest belangrijke deel van mijn onderzoek was uiteraard de analyse: effectief gaan bestuderen hoe het ProbLog-systeem presteert. Het grootste deel van de analyse was op variatie. De snelheid van de systemen wordt ook onderzocht en tenslotte komt ook de modelleringscomplexiteit aan bod, waar ook wordt gesproken over de effectieve voordelen die ProbLog biedt (hoofdzakelijk waar de probabiliteit van ProbLog een positief effect kan hebben).
+Het meest belangrijke deel van dit onderzoek is nagaan hoe het ProbLog-systeem presteert. Het grootste deel van de analyse was op vlak van variatie. De snelheid van de systemen wordt eveneens onderzocht en tenslotte komt ook de modelleringscomplexiteit aan bod.
 
-\subsubsection*{Snelheid}
-Een eerste criterium dat ik heb behandeld in mijn onderzoek is de snelheid. Ik heb aan de hand van verschillende puzzels gekeken hoe lang de geschreven programma's met bijhorende software (ProbLog en \texttt{clingo}) er over deden om een aantal samples, oplossingen die voldoen aan het programma, te genereren. Ook heb ik de vergelijking gemaakt tussen de tijd nodig bij het berekenen van alle mogelijke kansen bij Prob-\\Log en de tijd nodig om alle mogelijke samples op te lijsten met \texttt{clingo}. Het is uiteraard in een toepassing wenselijk, zelfs noodzakelijk, om een zo snel mogelijk systeem te hebben dat puzzels in real-time kan genereren. Spelletjes waarbij de speler lang moet wachten alvorens het spel kan beginnen, zijn gedoemd om te falen.
+\subsubsection{Snelheid}
+Een eerste criterium dat is behandeld in dit onderzoek is de snelheid. Er wordt onderzocht hoe lang het duurt een aantal samples, oplossingen die voldoen aan het programma, te genereren. 
 
-Om de snelheid te meten heb ik het ProbLog systeem tegenover het \texttt{clingo}-systeem geplaatst. Ik heb met het \texttt{sample}-commando van ProbLog telkens 100 samples gegenereerd, dat is mogelijk met het argument \texttt{-N}. Voor elke puzzel zag het commando er dus als volgt uit: \texttt{problog sample -N 100 puzzel}. E\'en sample is een mogelijke `wereld' die voldoet aan het programma, en dus de constraints die werden opgegeven.
+Om de snelheid te meten wordt het ProbLog systeem tegenover het \texttt{clingo}-systeem geplaatst. Er worden met het \texttt{sample}-commando van ProbLog telkens 100 samples gegenereerd, dat is mogelijk met het argument \texttt{-N}. Voor elke puzzel zag het commando er als volgt uit: \texttt{problog sample -N 100 puzzel}. Een sample is, zoals eerder, een mogelijke `wereld' die voldoet aan het programma.
 
-Voor \texttt{clingo} heb ik eveneens modellen laten genereren met als argumenten \texttt{--models=100} en \texttt{--rand-freq=1} welke respectievelijk er voor zorgen dat ook \texttt{clingo} 100 modellen genereert en 100 procent willekeurige beslissingen neemt. Het commando voor de AnsProlog puzzels zag er dan als volgt uit: \texttt{clingo --models=100 --rand-freq=1 puzzel}.
+Voor \texttt{clingo} zijn er eveneens modellen gegenereerd met als argumenten \texttt{--models=100} en \texttt{--rand-freq=1} welke respectievelijk er voor zorgen dat \texttt{clingo} 100 modellen genereert en 100 procent willekeurige beslissingen neemt, hoofdzakelijk bij het kiezen van variabelen. Het commando voor de AnsProlog puzzels zag er als volgt uit: \texttt{clingo --models=100 --rand-freq=1 puzzel}.
 
-Ik heb dan voor beide getimed hoe lang het duurde voor deze 100 puzzels te genereren. Dit timen op een Macbook Pro, 2.7 GHz Intel i5-processor, 8GB DDR3 RAM onder OS X 10.11.
+Voor beide is dan getimed hoe lang het duurde voor deze 100 puzzels te genereren. Dit timen is gebeurd op een Macbook Pro, 2.7 GHz Intel i5-processor, 8GB DDR3 RAM onder OS X 10.11.
 
-\subsubsection*{Variatie}
-Het tweede criterium waarop dit onderzoek zich baseert is de variatie tussen de gegenereerde puzzels. Dit is bij puzzels uiteraard een zeer belangrijk criterium. Puzzels die gegenereerd worden en maar minimale verschillen vertonen, zijn uiteraard niet wensbaar in een systeem dat levels van spellen moet construeren. Op het vlak van game content generation is het beter naar zo veel mogelijk variatie toe te streven. Zo krijgt de speler die het spel speelt niet het gevoel een bepaalde palttegrond of lay-out al eens tegen gekomen te zijn.
+\subsubsection{Variatie}
+Het tweede criterium is de variatie tussen de gegenereerde puzzels. Dit is bij puzzels een zeer belangrijk criterium. Puzzels die gegenereerd worden en maar minimale verschillen vertonen, zijn doorgaans niet gewenst. Een vaak terugkerend criterium is `afstand' tussen twee posities $P_1(X_1, Y_1)$ en $P_2(X_2, Y_2)$, meer bepaald de Manhattan-afstand, welke als volgt gedefinieerd is:
+$ D(P_1,P_2) = | X_1 - X_2 | + | Y_1 - Y_2 |$. Dit is een goede afstandsmaat omdat in geen enkele puzzel diagonale bewegingen zijn toegelaten.
 
-De variatie kwantitatief voorstellen vereistte voor elke puzzel een aparte aanpak om de variatie te kunnen bepalen, aangezien de constraints per puzzel verschillend zijn.
-
-Na de criteria, die hieronder worden besproken, opgesteld te hebben, heb ik 20 puzzels gegenereerd om vervolgens de score te berekenen van elke mogelijke combinatie van puzzels (puzzel 1 vs. puzzel 2, puzzel 1 vs. puzzel 3 \dots puzzel 2 vs. puzzel 3 \dots puzzel $(n-1)$ vs. puzzel $n$). Dit leidt tot $\frac{20!}{2!18!} = 190$ vergelijkingen. Hoe hoger de score, hoe meer variatie de puzzels vertonen.
 \begin{itemize}
 \item \textbf{Chromatic Maze}\\
-Voor de \textit{chromatic maze} heb ik 4 criteria ge\"evalueerd. De eerste drie samen tellen voor 50\% mee en het laatste criterium telt ook nog eens voor 50\% mee.
+Voor de \textit{chromatic maze} worden er 4 criteria ge\"evalueerd. De totale score wordt dan gegeven door $$\frac{C_{start}}{N} + \frac{C_{finish}}{N} + \frac{C_{sf}}{2\times N} + \frac{2 * C_{kleur}}{N^2 * ((2*N)-2)}$$ met $N$ de hoogte of breedte van het spelbord: deze zijn namelijk gelijk. Elke score wordt dus herschaald naar \'e\'en en nadien gesommeerd.
 \begin{itemize}
 
 \item \textit{Afstand tussen start-vakjes.}\\
-Ten eerste heb ik gekeken wat de Manhattan-afstand was tussen de vakjes die dienden als start bij beide puzzels. Dit heb ik dan herschaald naar een getal tussen 0 en 1 door te delen door de breedte van de puzzel. Zo worden relatieve waarden bekomen die vergelijkbaar zijn voor elke soort puzzel.
+Het eerste criterium is de Manhattan-afstand tussen de start-vakjes. Neem $start_1(X_1, Y_1)$ en $start_2(X_2, Y_2)$ als co\"ordinaten voor het startvakje bij respectievelijk de eerste en tweede puzzel. De score wordt dan als volgt berekend: $C_{start} = D(start_1, start_2)$.
 \item \textit{Afstand tussen finish-vakjes.}\\
-De afstand tussen de finish-vakjes is op een analoge manier, met Manhattan-afstand, berekend als de start-vakjes.
+De afstand tussen de finish-vakjes is op een analoge manier berekend, ditmaal met de co\"ordinaten $finish_1(X_1, Y_1)$ en $finish_2(X_2, Y_2)$ voor het finishvakje, als volgt: $C_{finish} = D(finish_1, finish_2)$.
+
 \item \textit{Afstand tussen de kleuren.}\\
-Verder heb ik voor elk vakje in de eerste puzzel gezocht naar het dichtsbijzijnde vakje met dezelfde kleur in de tweede puzzel. Als er geen vakje meer is dat dezelfde kleur heeft (of stel bijvoorbeeld in het slechtste geval dat alle kleuren tussen de twee puzzels verschillend zijn), zet ik de waarde op de maximale afstand die in die puzzel mogelijk is ($(2*n)-2$, met $n$ de breedte). Dit wordt eveneens herschaald naar een getal tussen 0 en 1 door te delen door (aantal vakjes $*$ maximale afstand mogelijk) $= n^2 * ((2*n)-2)$, met $n$ de breedte.
+  Voor elk vakje in de eerste puzzel wordt gezocht naar het dichtstbijzijnde vakje met dezelfde kleur in de tweede puzzel. Als er zo een vakje bestaat, zal dat vakje nadien niet meer beschouwd worden. Elke vakje kan namelijk maar maximaal \'e\'en tegenhanger hebben. De score ($C_{kleur}$) wordt gegeven door het algoritme A.1 gegeven in pseudocode in de appendix.
+
 \item \textit{Afstand tussen start en finish}\\
-Tenslotte heb ik de afstand tussen het start- en finish-vakje van de eerste puzzel vergeleken met diezelfde afstand bij de tweede puzzel. Dit laatste criterium geeft een maat van complexiteit aangezien de puzzels die worden gegenereerd altijd oplosbaar zijn: als de afstand tussen het begin- en eindpunt dan hetzelfde is, zijn de puzzels erg analoog. Indien de variatie wordt berekend met enkel de eerste drie criteria kan deze al relatief hoog liggen. Dit laatste criterium is echter doorslaggevend als maat voor complexiteit. Dit ene criterium krijgt 50\% van het totale gewicht.
+Tenslotte wordt de afstand tussen het start- en finish-vakje van de eerste puzzel vergeleken met diezelfde afstand bij de tweede puzzel. Dit laatste criterium geeft een maat van complexiteit: als de afstand tussen het begin- en eindpunt gelijk is, zijn de puzzels erg analoog. De berekening gebeurd met $start_1(Sx_1, Sy_1)$, $start_2(Sx_2, Sx_2)$, $finish_1(Fx_1, Fy_1)$ en $finish_2(Fx_2, Fy_2)$, als volgt: $C_{sf} = |D(start_1, finish_1) - D(start_2, finish_2)|$.
+
 \end{itemize}
 \item Perfect Maze\\
-De \textit{perfect maze} is getest aan de hand van twee criteria, namelijk het aantal overeenkomstige verbindingen en de lengte van het kortste pad dat mogelijk is met die verbindingen. Het aantal overeenkomstige verbindingen krijgt een gewicht van 75\% en de afstand van het kortste pad een gewicht van 25\%, aangezien de kans dat het korste pad hetzelfde is, relatief groot is.
+De \textit{perfect maze} is getest, steunend op twee criteria: het aantal overeenkomstige verbindingen en de lengte van het kortst mogelijke pad. Het aantal overeenkomstige verbindingen krijgt een groter gewicht dan het kortste pad, aangezien de kans dat het kortste pad gelijk is, relatief groot is. De totale score wordt gegeven door:
+$$\frac{3}{4}*\frac{C_{verb}}{2*N + 3*(N-4)} + \frac{1}{4}*\frac{C_{pad}}{(2*N)-2}$$ met $N$ de hoogte of breedte van het spelbord.
 \begin{itemize}
 \item \textit{Aantal gelijkaardige verbindingen}\\
-In de \textit{perfect maze} wordt een verbinding weergeven als volgt: \texttt{parent(3,2,-1,0)} (zie ook appendix A.2), dit wil zeggen dat het vakje (3,2) verbonden is met (2,2). Uiteraard is dat hetzelfde als schrijven \texttt{parent(2,2,1,0)}. Op deze twee manieren wordt dus getest of een bepaald vakje in de ene puzzel verbonden is met een bepaald vakje in de andere puzzel. Voor elke overeenkomstige verbinding wordt bij de score \'e\'en opgeteld. Dit wordt nadien ook herschaald naar 75\% van de totale score.
+In de \textit{perfect maze} wordt een verbinding weergeven als volgt: \texttt{parent(3,2,-1,0)} (zie ook appendix B.2), dit wil zeggen dat het vakje (3,2) verbonden is met (2,2). Dat is analoog met: \texttt{parent(2,2,1,0)}. Op deze twee manieren wordt getest of een bepaald vakje in de ene puzzel verbonden is met een bepaald vakje in de andere puzzel. De score ($C_{verb}$) wordt berekend door algoritme A.2 gegeven in pseudocode in de appendix.
 \item \textit{Verschil in kortste pad}\\
-Voor elk van de twee puzzels wordt aan de hand van de bestaande verbindingen het korste pad berekend, gebruikmakend van het algoritme van Dijkstra. Het verschil in deze twee paden wordt beschouwd ten opzichten van het kortst mogelijke pad ($2*n + 3*(n-4)$, met $n$ de breedte) en nadien herschaald naar 25\% van de totale score.
+Voor elk van de twee puzzels wordt met bestaande verbindingen, gegeven door de \texttt{parent}-relaties, het kortste pad berekend, gebruikmakend van het algoritme van \cite{Dijkstra1959}. Deze waarde wordt bijgehouden in $C_{pad}$.
 \end{itemize}
 \item Dungeon\\
-De \textit{dungeon} is getest aan de hand van 7 criteria. Elk van deze criteria telt even zwaar door en levert, na herschaling, opnieuw een punt op 100.
+De \textit{dungeon} is onderworpen aan 6 criteria. De totale score wordt gegeven door: $$\frac{1}{6}\left(\frac{C_{d}}{N} + \frac{C_{a}}{N} + \frac{C_{da}}{N} + \frac{C_{m}}{N} + \frac{C_{am}}{N}+ \frac{C_{al}}{N}\right)$$ met $N$ de hoogte of breedte van het spelbord.
 \begin{itemize}
 \item \textit{Afstand tussen diamanten}\\
-Als eerste wordt de Manhattanafstand berekend tussen de diamanten van beide puzzels. Dit wordt dan herschaald naar een score tussen 0 en 1 door te delen door de maximaal mogelijke afstand.
-\item \textit{Afstand tussen altaars}\\
-Het tweede criterium is de afstand tussen de altaars en is volledig analoog aan de diamanten hierboven.
+Neem $diamant_1(X_1, Y_1)$ en $diamant_2(X_2, Y_2)$ als co\"ordinaten voor het diamant bij respectievelijk de eerste en tweede puzzel. De score wordt dan als volgt berekend: $C_{d} = D(diamant_1, diamant_2)$.
+\item \textit{Afstand tussen altaren}\\
+Neem $altaar_1(X_1, Y_1)$ en $altaar_2(X_2, Y_2)$ als co\"ordinaten voor het altaar bij respectievelijk de eerste en tweede puzzel. De score wordt dan als volgt berekend: $C_{a} = D(altaar_1, altaar_2)$.
+
 \item \textit{Afstand tussen diamant en altaar}\\
-Het derde criterium kan beschouwd worden als een maat voor de moeilijkheid van  de puzzel. Per puzzel wordt de afstand berekend tussen de locatie van de diamant en de locatie van het altaar. Er wordt zo berekend hoeveel stappen de speler minimaal moet zetten om de uitgang te kunnen openen. Het verschil in deze afstanden tussen beide puzzels wordt opnieuw herschaald door te delen door de maximaal mogelijke afstand.
+Voor twee puzzels wordt het verschil in afstand bepaald tussen de locatie van de diamant en de locatie van het altaar. Dit zijn het aantal stappen die de speler minimaal moet zetten om de uitgang te kunnen openen en geeft dus een maat voor complexiteit.  Dit wordt berekend met diamanten $diamant_1(X_1, Y_1)$ en $diamant_2(X_2, Y_2)$ en altaren $altaar_1(X_1, Y_1)$ en $altaar_2(X_2, Y_2)$ en wordt gegeven door: $C_{da} = |D(diamant_1, altaar_1) - D(diamant_2, altaar_2)|$.
 \item \textit{Verschil in aantal muren}\\
-Als vierde criterium wordt voor beide puzzels het aantal muren berekend en daarvan het verschil genomen. Dit wordt herschaald door te delen door het aantal vakjes min 2 (voor de diamant en het altaar).
-\item \textit{Verschil in lege vakjes}\\
-Analoog aan hierboven wordt als vijfde criterium het verschil in aantal vakjes berekend die geen muur, diamant of altaar zijn.
+Als vierde criterium wordt het verschil in aantal muren berekend ($C_m$).
 \item \textit{Afstand tot dichtstbijzijnde muur}\\
-Als voorlaatste criterium wordt voor elke muur de afstand berekend tot de dichtstbijzijnde muur in de tweede puzzel. Als er geen muur meer is die kan dienen als overeenkomstige muur, wordt de afstand maximaal gezet. Dit gebeurt op dezelfde manier als bij de \textit{chromatic maze} hierboven.
-\item \textit{Afstand tot dichtsbijzijnde lege vakje}\\
-Analoog aan hierboven wordt ook voor elk leeg vakje in de eerste puzzel een zo dicht mogelijk leeg vakje gezocht in de tweede puzzel.
+Als voorlaatste criterium wordt voor elke muur de afstand berekend tot de dichtstbijzijnde muur in de tweede puzzel. Eenmaal er geen muren meer zijn die kunnen dienen als overeenkomstige muur, wordt de afstand maximaal gezet. Dit wordt ge\"evalueerd aan de hand van algoritme A.3, gegeven in pseudocode in de appendix. Neem in dit algoritme $t_1$ = ``muur".
+\item \textit{Afstand tot dichtstbijzijnde lege vakje}\\
+Met hetzelfde algoritme als hierboven wordt ook voor elk leeg vakje in de eerste puzzel een zo dicht mogelijk leeg vakje gezocht in de tweede puzzel. Neem voor deze berekening $t_1$ = ``leeg'' in het algoritme en vervang $C_{am}$ door $C_{al}$.
 \end{itemize}
 
 \end{itemize}
 
 \subsection{Modellering}
-Verder heb ik ook andere, kleinere criteria in verband met de effectieve modellering onderzocht. Ik heb onder meer een analyse gemaakt naar waar nu effectief de probabiliteit van ProbLog aan bod komt en waar die eventueel extra mogelijkheden biedt. Eveneens heb ik onderzocht hoe goed de \texttt{evidence} van ProbLog presteert op gebied van game content generation en of er eventueel eenvoudigere alternatieven voor deze evidence bestaan bij de puzzels.
+Verder wordt de effectieve modellering onderzocht. Er wordt een analyse gemaakt naar waar de probabiliteit van ProbLog aan bod komt en waar die eventueel extra mogelijkheden biedt. Er wordt nagegaan hoe goed de \texttt{evidence} van ProbLog presteert en of er eventueel eenvoudigere alternatieven voor deze \texttt{evidence} bestaan bij de puzzels.
 
-Het voorstellen van de niet-uniforme keuzeregels uit AnsProlog, is mogelijk aan de hand van het \texttt{select\_uniform} en het \texttt{select\_weighted} predicaat. Dit laatste biedt een grotere variatie aan mogelijkheden aan aangezien het mogelijk is mogelijk is bepaalde elementen of aspecten aan je spelinhoud met een grotere kans te laten voorkomen. Dit is onder meer te zien bij de puzzel van de perfect maze (appendix A.2). Deze puzzel is herschreven zodat overbodige assignments, die toch niet kunnen voorkomen, niet gegeneerd worden. Zo zie je dat voor tegels die op de rand liggen slechts wordt gekozen uit 3 van de 4 mogelijke verbindingen. Dit gebeurt door met \texttt{select\_weighted} de mogelijke verbindingen een kans van $\frac{1}{3}$ te geven de verbinding die niet mogelijk is een kans van 0 te geven. Dit zou ook gemodelleerd kunnen worden door uniform te selecteren uit een lijst waarin enkel de drie mogelijkheden voorkomen, maar de aanpak met \texttt{select\_weighted} is iets eenvoudiger.
+%De niet-uniforme keuzeregels uit AnsProlog worden voorgesteld met het \texttt{select\_uniform} en het \texttt{select\_weighted} predicaat. Deze twee predicaten berusten op de basis van ProbLog, aangezien ze intern gebruik maken van predicaten geannoteerd met kansen. \texttt{select\_weighted} biedt een grotere variatie aan mogelijkheden, aangezien het mogelijk is bepaalde elementen met een grotere kans te laten voorkomen. Dit is onder meer te zien bij de puzzel van de \textit{perfect maze} (appendix B.2). Deze puzzel is herschreven zodat overbodige toekenningen, die niet kunnen voorkomen, niet gegenereerd worden. Zo wordt voor tegels die op de rand liggen slechts gekozen uit 3 van de 4 mogelijke verbindingen. Dit wordt bereikt door met \texttt{select\_weighted} de mogelijke verbindingen een kans van $\frac{1}{3}$ te geven en de verbinding die niet mogelijk is een kans 0 te geven. Dit zou ook gemodelleerd kunnen worden door uniform te selecteren uit een lijst waarin enkel de drie mogelijkheden voorkomen, maar de aanpak met \texttt{select\_weighted} is eenvoudiger.
 
-Verder is het in ProbLog dus ook mogelijk om de integriteitsvoorwaarden (de voorwaarden die altijd waar of net nooit waar mogen zijn) voor te stellen aan de hand van evidence. Het is eveneens duidelijk geworden dat dit ook op een alternatieve manier gaat, door je programm zo te schrijven dat modellen die niet voldoen aan je constraints gewoon niet te laten voorkomen. Een voorbeeld hier van vind je in appendix A.3, bij het model van de dungeon met en zonder evidence.
-
-	\begin{figure*}[t]
+\begin{figure*}[t]
 \centering
 \begin{subfigure}{.33\textwidth}
   \centering
@@ -430,49 +441,55 @@ Verder is het in ProbLog dus ook mogelijk om de integriteitsvoorwaarden (de voor
   \caption{}
   \label{fig:sub3}
 \end{subfigure}
-\caption{Variatie bij 20 gesampelde puzzels van verschillende dimensies van (a) \textit{chromatic maze}, (b) \textit{dungeons} en (c) \textit{perfect maze}.}
+\caption{Variatie bij 20 gesamplede puzzels van verschillende dimensies van (a) \textit{chromatic maze}, (b) \textit{dungeons} en (c) \textit{perfect maze}.}
 \label{fig:test}
 \end{figure*}
 
+Verder is het in ProbLog mogelijk om de integriteitsvoorwaarden voor te stellen aan de hand van \texttt{evidence}. Het is eveneens duidelijk geworden dat dit op een alternatieve manier mogelijk is, zie sectie 4.2. Een voorbeeld hier van staat in appendix B.3, bij het model van de \textit{dungeon} met en zonder \texttt{evidence}.
+
+
+
 \section{Resultaten}
-In deze paragraaf analyseer ik de resultaten bekomen uit de experimenten besproken in de vorige paragraaf. 
+In deze paragraaf worden de resultaten besproken die bekomen zijn met de experimenten uit de vorige paragraaf. 
 	\subsection{Snelheid}
-	De analyse op gebied van snelheid is zoals verwacht: het ProbLog-systeem is opmerkelijk trager dan \texttt{clingo}. ProbLog maakt gebruik van \textit{rejection based sampling}, terwijl AnsProlog gebruik maakt van complexere methodes waaronder \textit{no-good learning} gecombineerd met \textit{backtracking}. ProbLog genereert dus als het ware een sample, controleert daarna of deze voldoet aan de opgegeven voorwaarden, en start volledig opnieuw als dit niet zo is. Als er \textit{evidence} wordt opgegeven met een heel kleine kans, is de kans dat het gegenereerde sample daaraan voldoet uiteraard ook zeer klein.
-	
-	 \texttt{clingo} daarentegen leert uit gemaakte `fouten': wordt er ergens een variabele toegekend die tot een mislukking leidt, dan zal deze variabele nooit meer worden toegekend in de volgende samples. We kunnen dus concluderen dat het \texttt{clingo}-systeem veel sneller werkt: voor bepaalde puzzels was ProbLog zelfs niet in staat een sample te genereren terwijl \texttt{clingo} dit nog wel kon in een acceptabele tijd.
+	De analyse op gebied van snelheid is zoals verwacht en niet bijzonder: het ProbLog-systeem is opmerkelijk trager dan \texttt{clingo}. ProbLog maakt gebruik van \textit{rejection based sampling}, terwijl AnsProlog gebruik maakt van complexere methodes waaronder \textit{no-good learning} gecombineerd met \textit{backtracking}. 
+	 \texttt{clingo} leert uit gemaakte `fouten': wordt er een variabele toegekend die tot een mislukking leidt, zal deze variabele nooit nog worden toegekend in de volgende samples. We kunnen concluderen dat het \texttt{clingo}-systeem veel sneller werkt: voor bepaalde puzzels was ProbLog zelfs niet in staat een sample te genereren.
 	 
-Hetzelfde geldt voor inferentie in ProbLog, het berekenen van de kansen van alle queries in ProbLog (dat gebeurt met het commando \texttt{problog}, zonder extra opties). Bij puzzels met hogere dimensies, ingewikkeldere constraints of  evidence met kleine kansen, sloeg ProbLog er nooit in om het model te evalueren. Zelfs voor puzzels met een kleine 100 000 mogelijkheden, kwam het niet tot een resultaat. \texttt{clingo} daarentegen was in staat om tot 30 miljoen samples weer te geven alvorens vast te lopen.
+Hetzelfde geldt voor inferentie in ProbLog, het berekenen van de kansen van alle queries in ProbLog. Dit wordt bereikt met het commando \texttt{problog}, zonder extra opties. Bij puzzels met hogere dimensies, ingewikkeldere constraints of  \texttt{evidence} met kleine kansen, sloeg ProbLog er nooit in om het model te evalueren. Voor puzzels met een kleine 100 000 mogelijkheden was \texttt{clingo} in staat om tot 30 miljoen samples weer te geven alvorens vast te lopen, ProbLog vond geen sample. \texttt{clingo} genereert ook consequent samples (elke X seconden), terwijl dit bij ProbLog zeer variabel was: dit viel op bij alle soorten puzzels. Waarom \texttt{clingo} consequenter puzzels kon genereren heeft te maken met de variatie: opeenvolgende gesamplede puzzles tonen bijna geen variatie, zoals besproken in volgende paragraaf.
 	
 	\subsection{Variatie}
 	
-	Voor de variatie verliep het experiment als volgt: voor elk van de puzzels zijn telkens 20 samples gegenereerd voor verschillende dimensies. Nadien heb ik deze puzzels allemaal  (elke combinatie) met elkaar vergeleken aan de hand van de criteria besproken in paragraaf 3.
+	Het experiment om de variatie te bepalen verliep als volgt: na de criteria, die besproken zijn in paragraaf 4.3, per puzzel opgesteld te hebben, zijn er 20 puzzels gegenereerd. Er wordt vervolgens een score op 100 berekend van elke mogelijke combinatie van puzzels (puzzel 1 vs. puzzel 2, puzzel 1 vs. puzzel 3 ...  puzzel 2 vs. puzzel 3 ...  puzzel $(n-1)$ vs. puzzel $n$). Dit leidt tot $\frac{20!}{2!18!} = 190$ vergelijkingen. Hoe hoger de score, hoe sterker de variatie.
 	
-	In figuur \ref{fig:sub1} zien we de variatie tussen de verschillende \textit{chromatic mazes} van verschillende dimensies. Ik heb samples gegenereerd voor dimensie drie en vier met zes kleuren en ook voor dimensie vijf met vier kleuren (waardoor het aantal mogelijkheden al daalt). De bekomen resultaten heb ik gesorteerd van laag naar hoog om een beter overzicht te verkrijgen. Het is duidelijk dat ProbLog meer vari\"erende puzzels genereert. Zelfs als de \texttt{--rand-freq}, de willekeurigheid waarmee keuzes worden gemaakt in AnsProlog, op 100\% stond en ik manueel de seed van de random generator aanpastte, bezorgde dit nagenoeg dezelfde resultaten.	
+	In figuur \ref{fig:sub1} wordt de variatie tussen de verschillende \textit{chromatic mazes} van verschillende dimensies afgebeeld. De bekomen resultaten zijn gesorteerd van laag naar hoog om een beter overzicht te verkrijgen. Het is duidelijk dat ProbLog meer vari\"erende puzzels genereert. Zelfs als de \texttt{--rand-freq}, de willekeurigheid waarmee keuzes van variabelen worden gemaakt in AnsProlog, op 100\% stond en manueel de seed van de random generator werd aangepast, bezorgde dit nagenoeg identieke resultaten.	
 	
 	Een analoog resultaat kan worden afgeleid voor de \textit{dungeons}, te zien in figuur \ref{fig:sub2}. Dit zijn samples van \textit{dungeons} met verschillende dimensies, waarbij er \'e\'en diamantje en \'e\'en altaar is  en waarbij de rest van de vakjes (willekeurig) ofwel een muur ofwel niets zijn. 
 	
-	In figuur \ref{fig:sub3} valt op dat zowel ProbLog als \texttt{clingo} een relatief lage variatie bereiken. Dit is te wijten aan het feit dat er een klein aantal mogelijkheden is voor de Perfect Maze. Er valt eenvoudig theoretisch te berekenen dat er bij dimensie drie 192 mogelijkheden zijn en bij dimensie vier zijn dat er maar net 100 000. In vergelijking: bij de chromatic maze zijn er vanaf dimensie drie al meer dan 50 miljoen mogelijkheden. Het is dus vrij evident dat de variatie lager ligt: er zijn veel minder puzzels om uit te kiezen.
+	In figuur \ref{fig:sub3} valt op dat zowel ProbLog als \texttt{clingo} een relatief lage variatie bereiken. Dit is te wijten aan het feit dat er een klein aantal mogelijkheden is voor de \textit{perfect maze}. Er valt eenvoudig theoretisch te berekenen dat er bij dimensie drie 192 mogelijkheden zijn en bij dimensie vier zijn dat er iets meer dan 100 000. In vergelijking: bij de \textit{chromatic maze} zijn er vanaf dimensie drie meer dan 50 miljoen mogelijkheden. Het is vrij evident dat de variatie lager ligt: er zijn veel minder puzzels om uit te kiezen.
 	
-	Bij de eerste twee puzzels is het wel heel duidelijk dat de variatie bij ProbLog veel hoger ligt dan bij het gebruik van \texttt{clingo}. Dit is dankzij het feit dat bij elke sample opnieuw ProbLog effectief willekeurige keuzes maakt, terwijl \texttt{clingo} nooit echte `randomness' bereikt.
+	Bij de eerste twee puzzels is het duidelijk dat de variatie bij ProbLog veel hoger ligt vergeleken met variatie bekomen aan de hand \texttt{clingo}. Dit is dankzij het feit dat bij elke sample opnieuw ProbLog effectief willekeurige keuzes maakt, terwijl \texttt{clingo} nooit echte `randomness' bereikt.
 	
-Een kleine bemerking hierbij is, hoewel de variatie van ProbLog hoger ligt, de gegenereerde \textit{chromatic mazes} bijvoorbeeld niet altijd ingewikkeld zijn. Ongeveer de helft van van de \textit{chromatic maze} hebben een oplossing die meer dan vijf stappen vereistte.
+Een kleine opmerking hierbij is, hoewel de variatie van ProbLog hoger ligt, de gegenereerde \textit{chromatic mazes} bijvoorbeeld niet altijd ingewikkeld zijn, op vlak van oplosbaarheid. Ongeveer de helft van van de \textit{chromatic maze} hebben een oplossing die meer dan vijf stappen vereiste om van start naar finish te geraken. De rest van de puzzels mag dan wel een hoge variatie hebben op vlak van welke vakjes welke kleuren hebben en waar de start en finish liggen, de afstand tussen start en finish kan heel vaak gelijk zijn bij lage dimensies.
 
 	\subsection{Modellering}
-	Op vlak van modellering heb ik reeds besproken dat de vertaling tussen AnsProlog en ProbLog over het algemeen relatief eenvoudig gaat. Iets moeilijker was het opstellen van constraints die altijd of net nooit moesten waar zijn, daar zijn twee methodes voor: ofwel simpelweg \texttt{evidence} voorzien, ofwel het programma herschrijven zodat bepaalde constraints, die normaal worden voorzien aan de hand van evidence, simpelweg niet kunnen voorkomen. Deze laatste aanpak was nodig bij bijvoorbeeld de \textit{dungeon}. Als de \texttt{evidence} wordt opgelegd (met dus het echte \texttt{evidence}-sleutelwoord) van bijvoorbeeld maximaal \'e\'en diamant en \'e\'en altaar te hebben, werd de uitvoeringstijd onnoemelijk lang. Constraints als deze zijn eenvoudig om te vormen naar niet-evidence. 
+	Op vlak van modellering werd al besproken dat de vertaling tussen AnsProlog en ProbLog relatief eenvoudig gaat. Duidelijk moeilijker was het opstellen van de integriteitsvoorwaarden, daar zijn twee methodes voor: ofwel \texttt{evidence} voorzien, ofwel het programma herschrijven zodat bepaalde constraints, niet kunnen voorkomen. Deze laatste aanpak was nodig bij bijvoorbeeld de \textit{dungeon}. Als \texttt{evidence} wordt opgelegd van bijvoorbeeld maximaal \'e\'en diamant en \'e\'en altaar te hebben, werd de uitvoeringstijd onnoemelijk lang. Constraints als deze zijn eenvoudig om te vormen naar niet-evidence. Zonder \texttt{evidence} kan ProbLog tot dimensie vijf binnen een aanzienlijke tijd samples genereren, terwijl met \texttt{evidence} het systeem na vele ($>$ 8) uren uiteindelijk vastloopt en geen uitkomst genereert.
 	
-	Er waren echter bij de dungeon ook veel complexere voorwaarden. E\'en voorbeeld hiervan is er voor zorgen dat er altijd een pad bestaat tussen de diamant en het altaar, en dat het altaar nooit omsloten is door muren en dat het gem net wel altijd door minimaal 3 muren omsloten is ... Uit alle mogelijke werelden hebben werelden met zo'n voorwaarden een enorm kleine kans op voorkomen. Deze constraints voorstellen als \texttt{evidence} is niet, of toch zeer moeilijk, haalbaar. De uitvoeringstijd gaat hierdoor enorm de hoogte in. Zonder evidence kan ProbLog nog voor vele dimensies binnen een aanzienlijke tijd samples genereren, terwijl zonder evidence het systeem na vele uren uiteindelijk vastloopt en geen uitkomst genereert. Proberen deze evidence te herschrijven naar code die er voor zorgt dat deze werelden gewoonweg niet kunnen voorkomen, is erg complex.  ProbLog vertoont dus duidelijk een limitatie op gebied van game content generation: moeilijke constraints met een kleine kans vereisen een specifieke aanpak en zijn moeilijk te implementeren.
+Er waren echter bij de \textit{dungeon} ook veel complexere, specifiekere voorwaarden: zoals de afstand van het minimale pad dat de speler moet afleggen. Uit alle geldige werelden hebben werelden met zo'n voorwaarden een enorm kleine kans op voorkomen. Werelden genereren met deze constraints voorgesteld als \texttt{evidence} is niet, of toch zeer moeilijk, haalbaar. Pogen deze \texttt{evidence} te herschrijven naar code die er voor zorgt dat deze werelden gewoonweg niet kunnen voorkomen, vereist meer werk dan de \texttt{evidence}-aanpak en is ook vrij specifiek per puzzel.  ProbLog vertoont duidelijk een beperking op gebied van game content generation: moeilijke constraints met een kleine kans vereisen een specifieke (en soms complexe) aanpak. Het gebruik van \texttt{evidence} in zo'n gevallen is niet voordelig.
 	
-	Daarnaast is het wel duidelijk, zoals in het voorbeeld van de perfect maze met een gemaximaliseerd aantal horizontale verbindingen, dat de randomness van ProbLog een voordeel kan bieden. Het biedt de mogelijkheid een bepaalde voorwaarde op een alternatieve manier te formuleren. Het kan een beetje beschouwd worden als 'vals spelen', maar leidt wel tot hetzelfde resultaat. Dit is dan weer een aspect waar ProbLog een voordeel biedt op het vlak van game content generation.
+	Daarnaast is het duidelijk, zoals in het voorbeeld van de \textit{perfect maze} met een gemaximaliseerd aantal horizontale verbindingen, dat de randomness van ProbLog een voordeel kan bieden. Het biedt de mogelijkheid een bepaalde voorwaarde op een alternatieve manier te formuleren, die niet mogelijk is in het ASP model.
 	
 \section{Conclusie en toekomstig werk}
-Uit de voorgaande analyse kunnen we besluiten dan ProbLog mogelijkheden biedt op het gebied van game content generation. Indien variatie een belangrijke factor is wint het ProbLog systeem duidelijk van het \texttt{clingo}-systeem. Op vlak van snelheid daarentege,, maakt ProbLog geen schijn van kans: de sampler is te na\"ief en te traag om snel oplossingen van puzzels te kunnen geven.
+Uit de voorgaande analyse kunnen we een antwoord geven op onze vragen uit sectie 3. 
+\begin{itemize}[leftmargin=6mm]
+\item[\textbf{A$_1$}] Het ProbLog-systeem is geschikt om inhoud van spellen te genereren, als snelheid van ondergeschikt belang is. 
+\item[\textbf{A$_2$}] Op vlak van snelheid komt ProbLog niet in de buurt van ASP, maar op gebied van variatie biedt ProbLog een enorm voordeel. De puzzels gegenereerd met ProbLog tonen veel meer variatie.
+\item[\textbf{A$_3$}] ProbLog biedt interessante voordelen dankzij zijn randomness in het defini\"eren van integriteitsvoorwaarden.
+\end{itemize}
 
-Naar de toekomst toe is het interessant om te onderzoeken hoe puzzels presteren als we het gebruik van evidence zoveel mogelijk vermijden. Dit vereist wel per constraint een erg gedetailleerde aanpak. Een andere mogelijheid zou zijn om de sampler te verbeteren.
-
-De code om de puzzels zelf te genereren alsook de code die werd gebruikt om de variatie en snelheid te berekenen, is te vinden op \url{https://github.com/RobinHaveneers/bachelorpaper-probabilistic-programming}.
+Naar de toekomst toe is het interessant om te onderzoeken hoe puzzels presteren als we het gebruik van \texttt{evidence} zoveel mogelijk vermijden. Dit vereist wel per constraint een erg gedetailleerde aanpak. Een andere mogelijkheid zou zijn om de sampler te verbeteren.
 
 \section*{Dankwoord}
-Graag wil ik dr. Angelika Kimmig bedanken voor haar nuttige feedback en bijdrage bij het hele proces van deze bachelorproef.
+Graag wil ik dr. Kimmig bedanken voor haar nuttige feedback en bijdrage bij het hele proces van deze bachelorproef.
 
 
 %% The file named.bst is a bibliography style file for BibTeX 0.99c
@@ -482,12 +499,82 @@ Graag wil ik dr. Angelika Kimmig bedanken voor haar nuttige feedback en bijdrage
 \newpage
 
 \appendix
+\section{Algoritmes}
+\subsection{Kleurafstand}
+\begin{minipage}{\linewidth}
+  \vspace{-\baselineskip}
+\begin{algorithm}[H]
+\begin{algorithmic}[1]
+ \State $\mathbf{bord_1}$: {de vakjes van het eerste bord}
+ \State $\mathbf{bord_2}$: {de vakjes van het tweede bord}
+ \State $n \gets$ dimensie van $bord_1$ (of $bord_2$)
+ \For{elk vakje $v_1(x_1,y_1)$ in bord${_1}$}
+ 	\State $k_1 \gets$ kleur van \textit{$v_1$} 
+ 	\For{elk vakje $v_2(x_2,y_2)$ in bord${_2}$}
+ 		\State$k_2 \gets$ kleur van \textit{$v_1$} 
+  		\If{$k_1 = k_2$}
+   			\State $C_{kleur} \gets C_{kleur} + D(v_1, v_2)$
+   			\State verwijder $v_2$ uit $bord_2$
+   		\Else
+   			\State $C_{kleur} \gets C_{kleur} + ((2*N)-2)$ 
+  		\EndIf
+  	\EndFor
+  \EndFor
+  \end{algorithmic}
+  \end{algorithm}
+  \end{minipage}
+  
+  \subsection{Gelijkaardige verbindingen}
+    \begin{minipage}{\linewidth}
+  \vspace{-\baselineskip}
+\begin{algorithm}[H]
+\begin{algorithmic}[1]
+ \State $\mathbf{bord_1}$: {de parent-relaties van het eerste bord}
+ \State $\mathbf{bord_2}$: {de parent-relaties van het tweede bord}
+ \State $C_{verb} \gets$ 0
+ \For{elk parent $p_1(x_1, y_1, x_{v1}, y_{v1})$ in bord${_1}$}
+ 	\For{elk vakje $p_2(x_2, y_2, x_{v2}, y_{v2})$ in bord${_2}$}
+  		\If{[($x_2 = x_1$ en $y_2 = y_1$ en $ x_{v2} = x_{v1}$ en $ y_{v2} = y_{v1}$)\\\hspace*{4mm} \textbf{\textit{of}} ($x_2 = x_1 + x_{v1} $ en $y_2 = y_1 + y_{v1}$ en $ x_{v2} = -x_{v1}$ \hspace*{9mm}en $ y_{v2} = -y_{v1}$)]   }
+   			\State $C_{verb} \gets C_{verb} + 1$
+  		\EndIf
+  	\EndFor
+  \EndFor
+  \end{algorithmic}
+  \end{algorithm}
+  \end{minipage}
+  
+  \subsection{Afstand tot dichtsbijzijnde vakje}
+  \begin{minipage}{\linewidth}
+  \vspace{-\baselineskip}
+\begin{algorithm}[H]
+\begin{algorithmic}[1]
+ \State $\mathbf{bord_1}$: {de vakjes van het eerste bord}
+ \State $\mathbf{bord_2}$: {de vakjes van het tweede bord}
+ \State $C_{am} \gets 0$
+ \For{elk vakje $v_1(x_1, y_1, t_1)$ in bord${_1}$}
+ 	\State $afstand \gets (2*N)-2$
+ 	\State $teVerwijderen \gets \varnothing$
+ 	\If{$t_1 = t_2$}
+ 		\For{elk vakje $v_2(x_2, y_2, t_2)$in bord${_2}$}
+  			\If{$ D(v_1,v_2) < afstand$}
+   				\State $afstand \gets D(v_1,v_2)$
+   				\State $teVerwijderen = v_2$
+  			\EndIf
+  		\EndFor
+  		\State $C_{am} \gets afstand$
+  	\EndIf
+  	\If{$teVerwijeren \neq \varnothing$}
+  	\State verwijder $teVerwijderen$ uit $bord_2$
+  	\EndIf
+  \EndFor
+  \end{algorithmic}
+  \end{algorithm}
+  \end{minipage}
 
 \section{ProbLog}
 \subsection{Chromatic Maze}
 \begin{lstlisting}[language=Prolog-pretty]
 
-%% Hulpfuncties
 
 % Genereer een lijst van getallen
 list_of_integers(L,U,R) :-
@@ -639,7 +726,7 @@ evidence(victory).
 \end{lstlisting}
 
 \subsection{Perfect Maze}
-Deze versie is geoptimaliseerd in de zin dat de hoekjes apart worden behandeld: deze hebben namelijk minder mogelijke verbindingen.
+Deze versie is geoptimaliseerd in de zin dat de hoekjes apart worden behandeld: deze hebben maar twee mogelijke verbindingen.
 \begin{lstlisting}[language=Prolog-pretty]
 % Definieer de bordtgrootte
 width(3).
@@ -761,7 +848,7 @@ evidence(linked(X,Y)) :-
 \end{lstlisting}
 
 \subsection{Dungeon}
-Dit is een simpele versie van de dungeon: de enige constraints zijn dat er maximaal \'e\'en diamant en \'e\'en altaar is. De rest van de vakjes zijn een muur of niets
+Dit is een simpele versie van de \textit{dungeon}: de enige constraints zijn dat er maximaal \'e\'en diamant en \'e\'en altaar is. De rest van de vakjes zijn een muur of niets
 
 \subsubsection*{Met evidence}
 \begin{lstlisting}[language=Prolog-pretty]

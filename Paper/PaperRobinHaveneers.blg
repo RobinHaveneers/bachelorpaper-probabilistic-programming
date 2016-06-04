@@ -4,45 +4,45 @@ The top-level auxiliary file: PaperRobinHaveneers.aux
 The style file: PaperRobinHaveneers.bst
 Database file #1: PaperRobinHaveneers.bib
 Warning--empty publisher in smith
-You've used 9 entries,
+You've used 13 entries,
             2439 wiz_defined-function locations,
-            596 strings with 6160 characters,
-and the built_in function-call counts, 3818 in all, are:
-= -- 374
-> -- 183
+            623 strings with 6916 characters,
+and the built_in function-call counts, 5330 in all, are:
+= -- 523
+> -- 258
 < -- 1
-+ -- 61
-- -- 59
-* -- 309
-:= -- 627
-add.period$ -- 29
-call.type$ -- 9
-change.case$ -- 62
-chr.to.int$ -- 9
-cite$ -- 10
-duplicate$ -- 148
-empty$ -- 291
-format.name$ -- 72
-if$ -- 797
++ -- 88
+- -- 85
+* -- 437
+:= -- 878
+add.period$ -- 40
+call.type$ -- 13
+change.case$ -- 90
+chr.to.int$ -- 13
+cite$ -- 14
+duplicate$ -- 201
+empty$ -- 400
+format.name$ -- 102
+if$ -- 1097
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 8
-newline$ -- 47
-num.names$ -- 33
-pop$ -- 66
+missing$ -- 12
+newline$ -- 66
+num.names$ -- 45
+pop$ -- 95
 preamble$ -- 1
-purify$ -- 71
+purify$ -- 104
 quote$ -- 0
-skip$ -- 113
+skip$ -- 157
 stack$ -- 0
-substring$ -- 179
-swap$ -- 30
+substring$ -- 250
+swap$ -- 38
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 72
+type$ -- 100
 warning$ -- 1
-while$ -- 27
-width$ -- 12
-write$ -- 115
+while$ -- 39
+width$ -- 16
+write$ -- 164
 (There was 1 warning)
